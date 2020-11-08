@@ -51,7 +51,7 @@ const StyledLink = styled(Link)`
     }
 `;
 
-const AuthForm = ({children,type}) => {
+const AuthForm = ({children,type,form,onChange}) => {
     return (
         <AuthTemplateBlock>
             {children}
@@ -59,23 +59,23 @@ const AuthForm = ({children,type}) => {
                 type==="SignUp" && (
                     <InputItem>
                         <h2>UserName</h2>
-                        <InputBox type="text"/>
+                        <InputBox type="text" name="username" onChange={onChange} value={form.username}/>
                     </InputItem>
                 )
             }
             <InputItem>
                 <h2>ID</h2>
-                <InputBox type="text"/>
+                <InputBox type="text" name="userid" onChange={onChange} value={form.userid}/>
             </InputItem>
             <InputItem>
                 <h2>Password</h2>
-                <InputBox type="password"/>
+                <InputBox type="password" name="password" onChange={onChange} value={form.password}/>
             </InputItem>
             {
                 type==="SignUp" && (
                     <InputItem>
                         <h2>Password Confirm</h2>
-                        <InputBox type="password"/>
+                        <InputBox type="password" name="passwordConfirm" onChange={onChange} value={form.passwordConfirm}/>
                     </InputItem>
                 )
             }

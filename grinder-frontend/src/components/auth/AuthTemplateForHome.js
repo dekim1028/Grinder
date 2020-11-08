@@ -1,9 +1,9 @@
 import React from 'react';
 import AuthForm from './AuthForm';
 
-const AuthTemplateForHome = ({type}) => {
+const AuthTemplateForHome = ({type,onChange,form}) => {
     return (
-        <AuthForm type={type}/>
+        <AuthForm type={type} form={form} onChange={onChange}/>
     );
 };
 
