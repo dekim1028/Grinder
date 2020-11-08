@@ -110,7 +110,7 @@ const AboutGrinderPage = () => {
         <HomeBlock>
             <HomeHeader>
                 <div className="logo">About GRINDER</div>
-                <StyledButton>Sign in</StyledButton>
+                <StyledButton to="/signin">Sign in</StyledButton>
             </HomeHeader>
             <HomeContent>
                 <Content>
@@ -120,7 +120,7 @@ const AboutGrinderPage = () => {
                         <h3>공부를 열심히 하는 사람 혹은<br/>공부벌레 라는 의미를 지니고 있다.</h3>
                     </ContentItem>
                     <ContentItem>
-                        <SignUpContainer/>
+                        <SignUpContainer page="home"/>
                     </ContentItem>
                 </Content>
             </HomeContent>
