@@ -30,10 +30,10 @@ const Title = styled.div`
     }
 `;
 
-const AuthTemplate = ({type,onChange,form}) => {
+const AuthTemplate = ({type,form,onChange,onSubmit,error}) => {
     return (
         <AuthTemplateBlock>
-            <AuthForm type={type} form={form} onChange={onChange}>
+            <AuthForm type={type} form={form} onChange={onChange} onSubmit={onSubmit} error={error}>
                 <Title>
                     <Link to="/">GRINDER</Link>
                 </Title>

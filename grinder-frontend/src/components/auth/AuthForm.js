@@ -36,6 +36,7 @@ const AuthTemplateFooter = styled.div`
 
 const MessageBox = styled.div`
     font-size: 14px;
+    color:red;
 `;
 
 const StyledButton = styled(Button)`
@@ -51,9 +52,9 @@ const StyledLink = styled(Link)`
     }
 `;
 
-const AuthForm = ({children,type,form,onChange}) => {
+const AuthForm = ({children,type,form,onChange,onSubmit,error}) => {
     return (
-        <AuthTemplateBlock>
+        <AuthTemplateBlock onSubmit={onSubmit}>
             {children}
             {
                 type==="SignUp" && (
@@ -82,6 +83,7 @@ const AuthForm = ({children,type,form,onChange}) => {
             
             <AuthTemplateFooter>
                 <MessageBox>
+                    {error}
                 </MessageBox>
                 <StyledButton type="submit">
                     {type==="SignUp"?"Sign up":"Sign in"}
