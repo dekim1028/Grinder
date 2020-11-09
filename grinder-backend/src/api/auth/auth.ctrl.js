@@ -57,7 +57,7 @@ export const signup = async ctx =>{
 };
 
 /*
-    POST api/auth/login
+    POST api/auth/signin
     {
         "userid":"velopert",
         "password":"mypass123"

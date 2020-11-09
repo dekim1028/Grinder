@@ -7,6 +7,7 @@ import * as authAPI from '../lib/api/auth';
 const CHANGE_FILED = "auth/CHANGE_FILED";
 const INITIALIZE_FORM ="auth/INITIALIZE_FORM";
 const [SIGN_UP,SIGN_UP_SUCCESS,SIGN_UP_FAILURE] = createRequestActionTypes('user/SIGN_UP');
+const [SIGN_IN,SIGN_IN_SUCCESS,SIGN_IN_FAILURE] = createRequestActionTypes('user/SIGN_IN');
 
 export const changeField = createAction(CHANGE_FILED,({form,key,value})=>({
     form,
@@ -22,10 +23,17 @@ export const signUp = createAction(SIGN_UP,({userid,username,password})=>({
     password
 }));
 
+export const signIn = createAction(SIGN_IN,({userid,password})=>({
+    userid,
+    password
+}));
+
 const signUpSaga = createRequestSaga(SIGN_UP,authAPI.signup);
+const signInSaga = createRequestSaga(SIGN_IN,authAPI.signin);
 
 export function* authSaga(){
     yield takeLatest(SIGN_UP,signUpSaga);
+    yield takeLatest(SIGN_IN,signInSaga);
 }
 
 const initialState = {
@@ -54,6 +62,14 @@ const auth = handleActions({
         auth,
     }),
     [SIGN_UP_FAILURE]:(state,{payload:error})=>({
+        ...state,
+        authError:error,
+    }),
+    [SIGN_IN_SUCCESS]:(state,{payload:auth})=>({
+        ...state,
+        auth,
+    }),
+    [SIGN_IN_FAILURE]:(state,{payload:error})=>({
         ...state,
         authError:error,
     })

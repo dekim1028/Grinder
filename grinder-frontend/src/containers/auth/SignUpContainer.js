@@ -1,16 +1,22 @@
 import React,{useEffect, useState} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import AuthTemplate from '../../components/auth/AuthTemplate';
 import AuthTemplateForHome from '../../components/auth/AuthTemplateForHome';
 import { changeField,initializeForm, signUp } from '../../modules/auth';
+import { check } from '../../modules/user';
 
-const SignUpContainer = ({page}) => {
+const SignUpContainer = ({page,history}) => {
     const dispatch = useDispatch();
     const [error,setError] = useState('');
 
-    const {form} = useSelector(({auth})=>({
+    const {form,auth,authError,user,userError} = useSelector(({auth,user})=>({
         form:auth.signup,
-    }))
+        auth:auth.auth,
+        authError:auth.authError,
+        user:user.user,
+        userError:user.userError,
+    }));
 
     const onChange = e =>{
         const {name,value} = e.target;
@@ -48,6 +54,32 @@ const SignUpContainer = ({page}) => {
         dispatch(initializeForm());
     },[dispatch]);
 
+    useEffect(()=>{
+        if(authError){
+            console.log(authError);
+            return;
+        }
+        if(auth){
+            dispatch(check());
+        }
+    },[dispatch,auth,authError])
+
+    useEffect(()=>{
+        if(userError){
+            console.log(userError);
+            return;
+        }
+        if(user){
+            console.log("Sign up success");
+            try{
+                localStorage.setItem("user",JSON.stringify(user));
+            }catch(e){
+                console.log("localStorage is not working");
+            }
+            history.push("/");
+        }
+    },[user,userError,history])
+
     if(page==="home"){
         return (
             <AuthTemplateForHome type="SignUp" form={form} onChange={onChange} onSubmit={onSubmit} error={error}/>
@@ -59,4 +91,4 @@ const SignUpContainer = ({page}) => {
     }
 };
 
-export default SignUpContainer;
+export default withRouter(SignUpContainer);
