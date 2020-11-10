@@ -56,7 +56,7 @@ const SignUpContainer = ({page,history}) => {
 
     useEffect(()=>{
         if(authError){
-            console.log(authError);
+            setError("이미 사용중인 ID입니다.");
             return;
         }
         if(auth){
@@ -65,10 +65,6 @@ const SignUpContainer = ({page,history}) => {
     },[dispatch,auth,authError])
 
     useEffect(()=>{
-        if(userError){
-            console.log(userError);
-            return;
-        }
         if(user){
             console.log("Sign up success");
             try{
@@ -78,7 +74,7 @@ const SignUpContainer = ({page,history}) => {
             }
             history.push("/");
         }
-    },[user,userError,history])
+    },[user,history])
 
     if(page==="home"){
         return (
