@@ -9,12 +9,11 @@ const SignInContainer = ({history}) => {
     const dispatch = useDispatch();
     const [error, setError] = useState('');
 
-    const {form,auth,authError,user,userError} = useSelector(({auth,user})=>({
+    const {form,auth,authError,user} = useSelector(({auth,user})=>({
         form:auth.signin,
         auth:auth.auth,
         authError:auth.authError,
-        user:user.user,
-        userError:user.userError,
+        user:user.user
     }));
 
     const onChange = e =>{
@@ -38,12 +37,14 @@ const SignInContainer = ({history}) => {
     };
 
     useEffect(()=>{
-        dispatch(initializeForm());
+        return(()=>{
+            dispatch(initializeForm());
+        });
     },[dispatch]);
 
     useEffect(()=>{
         if(authError){
-            console.log(authError);
+            setError('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
             return;
         }
         if(auth){
@@ -52,10 +53,6 @@ const SignInContainer = ({history}) => {
     },[dispatch,auth,authError])
 
     useEffect(()=>{
-        if(userError){
-            console.log(userError);
-            return;
-        }
         if(user){
             console.log("Sign in success");
             try{
@@ -65,7 +62,7 @@ const SignInContainer = ({history}) => {
             }
             history.push("/");
         }
-    },[user,userError,history])
+    },[user,history])
 
     return (
         <AuthTemplate type="SignIn" form={form} onChange={onChange} onSubmit={onSubmit} error={error}/>
