@@ -1,11 +1,18 @@
 import React from 'react';
 import AboutGrinderPage from './AboutGrinderPage';
+import { useSelector } from 'react-redux';
+import MainPage from './MainPage';
 
 const HomePage = () => {
-    //TODO: 로그인 시 메인페이지로 이동하도록 구현
-    return (
-        <AboutGrinderPage/>
-    );
+    const {user} = useSelector(({user})=>({
+        user:user.user,
+    }));
+
+    if(user){
+        return <MainPage/>;
+    }else{
+        return <AboutGrinderPage/>;
+    }
 };
 
 export default HomePage;
