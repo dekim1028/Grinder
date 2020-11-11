@@ -11,7 +11,7 @@ const HeaderBlock = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background:linear-gradient(to bottom,#66ccb6,#339290);
+    background-color: #66ccb6;
     padding: 0 1.5rem;
     z-index:999;
 `;
