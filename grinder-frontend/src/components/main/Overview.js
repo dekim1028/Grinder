@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {BiPin} from 'react-icons/bi';
+import {BiPin,BiDotsVertical} from 'react-icons/bi';
 import {VictoryPie} from 'victory';
 
 const OverviewBlock = styled.div`
@@ -47,10 +47,16 @@ const Plan = styled.div`
     border-radius: 15px;
     padding: 15px 25px;
     margin:0 10px 10px 0;
+`;
 
+const PlanHeader = styled.div`
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:20px;
     .subject{
         font-size: 15px;
-        margin: 0 0 20px 0;
+        margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -122,49 +128,70 @@ const Overview = () => {
                 <Title><BiPin/><span>Today's Plans</span></Title>
                 <PlansBlock>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
                         </Category>
                     </Plan>
                     <Plan>
-                        <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                        <PlanHeader>
+                            <h2 className="subject">수학 문제집 2p~18p 풀기</h2>
+                            <BiDotsVertical/>
+                        </PlanHeader>
                         <Category>
                             <div className="categoryColor"></div>
                             <div>수학</div>
