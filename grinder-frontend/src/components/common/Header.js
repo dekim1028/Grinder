@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const HeaderBlock = styled.div`
     position:fixed;
@@ -9,23 +10,33 @@ const HeaderBlock = styled.div`
     width: 100%;
     height: 50px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #66ccb6;
     padding: 0 1.5rem;
     z-index:999;
 `;
 
-const LogoBlock = styled.div`
+const LogoBlock = styled(Link)`
     color:white;
     font-size:25px;
     font-weight:bold;
 `;
 
 const MenuBlock = styled.div`
+    width:100%;
     color:white;
-    font-size:20px;
     font-weight:bold;
+    margin: 0 30px;
+    font-size: 15px;
+    display:flex;
+    align-items:center;
+`;
+
+const Menu = styled(Link)`
+    margin: 0 20px;
+    &:hover{
+        color:#8CE0C6;
+    }
 `;
 
 const StyledButton = styled(Button)`
@@ -42,10 +53,12 @@ const Header = ({onLogout}) => {
     return (
         <>
             <HeaderBlock>
-                <LogoBlock>GRINDER</LogoBlock>
+                <LogoBlock to="/">GRINDER</LogoBlock>
                 <MenuBlock>
-                    <StyledButton onClick={onLogout}>Logout</StyledButton>
+                    <Menu to="/study">Start Studying</Menu>
+                    <Menu to="/plan">Planner</Menu>
                 </MenuBlock>
+                <StyledButton onClick={onLogout}>Logout</StyledButton>
             </HeaderBlock>
             <Space/>
         </>
