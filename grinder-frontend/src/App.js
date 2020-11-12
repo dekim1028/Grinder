@@ -12,7 +12,7 @@ function App() {
       <Route path="/signin" component={SignInPage}/>
       <Route path="/signup" component={SignUpPage}/>
       <Route path="/study" component={StartStudyingPage}/>
-      <Route path="/plan" component={PlannerPage}/>
+      <Route path={["/planner/@:date","/planner"]} component={PlannerPage}/>
     </>
   );
 }

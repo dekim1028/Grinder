@@ -56,7 +56,7 @@ const Header = ({onLogout}) => {
                 <LogoBlock to="/">GRINDER</LogoBlock>
                 <MenuBlock>
                     <Menu to="/study">Start Studying</Menu>
-                    <Menu to="/plan">Planner</Menu>
+                    <Menu to="/planner">Planner</Menu>
                 </MenuBlock>
                 <StyledButton onClick={onLogout}>Logout</StyledButton>
             </HeaderBlock>
