@@ -1,6 +1,17 @@
 import React from 'react';
 import styled,{css} from 'styled-components';
 
+const inputStyle = css`
+    width:100%;
+    font-size: 20px;
+    font-weight:bold;
+    border: none;
+    outline: none;
+    border-bottom: 1px dashed #135461;
+    caret-color:#135461;
+    font-family: 'Rix오늘의만화',Comic Sans MS;
+`;
+
 const PlannerContentBlock = styled.div`
     display:inline-box;
     width:50%;
@@ -18,18 +29,11 @@ const PlannerContentBlock = styled.div`
         .react-datepicker-wrapper{
             display:block;
         }
+        
+        .react-datepicker__input-container input{
+            ${inputStyle};
+        }
     }
-`;
-
-const inputStyle = css`
-    width:100%;
-    font-size: 20px;
-    font-weight:bold;
-    border: none;
-    outline: none;
-    border-bottom: 1px dashed #135461;
-    caret-color:#135461;
-    font-family: 'Rix오늘의만화',Comic Sans MS;
 `;
 
 const InputBox = styled.input`
