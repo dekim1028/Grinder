@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import CheckListAddBox from './CheckListAddBox';
 
 const CheckListBlock =styled.div`
     font-size: 15px;
@@ -14,7 +15,8 @@ const Item = styled.div`
     margin-bottom:10px;
 
     .subject{
-        width: 15%;
+        width: 20%;
+        height: 20px;
         font-weight: bold;
         text-align:center;
     }
@@ -26,7 +28,7 @@ const Item = styled.div`
 
     .content{
         width: 100%;
-        padding: 0 5px;
+        padding-left:5px;
     }
 `;
 
@@ -44,7 +46,13 @@ const AddCheckListBtn = styled(Button)`
     }
 `;
 
-const CheckList = ({checkList}) => {
+const SubmitCheckListBtn = styled(Button)`
+    width:100%;
+    font-size: 13px;
+    margin-top:10px;
+`;
+
+const CheckList = ({checkList,newCheckList, onAdd, onDelete, onChange, onSubmit}) => {
     return (
         <CheckListBlock>
             {
@@ -57,8 +65,19 @@ const CheckList = ({checkList}) => {
                     </Item>
                 ))
             }
-           
-            <AddCheckListBtn>추가</AddCheckListBtn>
+            <form onSubmit={onSubmit}>
+            {
+                newCheckList && 
+                newCheckList.map((item)=>(
+                    <CheckListAddBox key={`newCheckList_${item.id}`} item={item} onDelete={onDelete} onChange={onChange}/>
+                ))
+            }
+            <AddCheckListBtn type="button" onClick={onAdd}>추가</AddCheckListBtn>
+            {
+                newCheckList.length>0 &&
+                <SubmitCheckListBtn type="submit">완료</SubmitCheckListBtn>
+            }
+            </form>
         </CheckListBlock>
     );
 };

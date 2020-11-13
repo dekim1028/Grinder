@@ -1,10 +1,11 @@
-import React,{useState} from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import PlannerContent from './PlannerContent';
-import CheckList from './CheckList';
+import CheckListContainer from '../../containers/plan/CheckListContainer';
+import Button from '../common/Button';
 
 const PlannerBlock = styled.div`
     padding: 25px 10px;
@@ -13,8 +14,19 @@ const PlannerBlock = styled.div`
 const PlannerPage = styled.div`
     width:600px;
     margin:0 auto;
-    padding: 5px 20px 20px;
+    padding: 20px;
     box-shadow: 1px 1px 5px grey;
+`;
+
+const PlannerHeader = styled.div`
+    display:flex;
+    justify-content:flex-end;
+`;
+
+const SaveBtn = styled(Button)`
+    font-size: 13px;
+    width: 50px;
+    height: 25px;
 `;
 
 const TimeTable = styled.table`
@@ -39,8 +51,7 @@ const TimeTable = styled.table`
     }
 `;
 
-const Planner = ({planner,plannerError,loading,onChangeText}) => {
-    const [startDate, setStartDate] = useState(new Date());
+const Planner = ({planner,plannerError,loading,plannerDate,onChangeText,onChangeDate,onSave}) => {
 
     if(plannerError){
         return <PlannerBlock>오류 발생</PlannerBlock>;
@@ -53,11 +64,14 @@ const Planner = ({planner,plannerError,loading,onChangeText}) => {
     return (
         <PlannerBlock>
             <PlannerPage>
+                <PlannerHeader>
+                    <SaveBtn onClick={onSave}>저장</SaveBtn>
+                </PlannerHeader>
                 <PlannerContent type="input" name="dday" title="디데이" value={planner.dday} onChange={onChangeText}/>
-                <PlannerContent title="날짜" name="date" value={moment(planner.date).format("yyyy.MM.DD ddd")} onChange={onChangeText}>
+                <PlannerContent title="날짜">
                     <DatePicker
-                        selected={startDate}
-                        onChange={date => setStartDate(date)}
+                        selected={plannerDate}
+                        onChange={date => onChangeDate(moment(date).format("yyyy-MM-DD"))}
                         dateFormat="yyyy.MM.dd eee"
                         value={moment(planner.date).format("yyyy.MM.DD ddd")}            
                     />
@@ -65,7 +79,7 @@ const Planner = ({planner,plannerError,loading,onChangeText}) => {
                 <PlannerContent type="input" name="wakeupTime" title="오늘의 기상시간" value={planner.wakeupTime} onChange={onChangeText}/>
                 <PlannerContent type="input" name="studyTime" title="오늘의 공부시간" value={planner.studyTime} readOnly/>
                 <PlannerContent title="오늘의 체크리스트">
-                    <CheckList checkList={planner.checkList}/>
+                    <CheckListContainer/>
                 </PlannerContent>
                 <PlannerContent title="오늘의 시간표">
                     <TimeTable>

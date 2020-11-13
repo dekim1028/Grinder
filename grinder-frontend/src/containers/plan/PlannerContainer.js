@@ -1,18 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import Planner from '../../components/plan/Planner';
 import { useSelector, useDispatch } from 'react-redux';
 import { readPlanner } from '../../modules/planner';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import {changeField, updatePlanner} from '../../modules/planner';
+import {initializeForm, changeField, updatePlanner} from '../../modules/planner';
 
-const PlannerContainer = ({match}) => {
+const PlannerContainer = ({history,match}) => {
     const dispatch = useDispatch();
+    const [plannerDate, setPlannerDate] = useState(new Date());
+
     const {planner,plannerError,loading} = useSelector(({planner,loading})=>({
         planner:planner.planner,
         plannerError:planner.plannerError,
         loading:loading['planner/READ_PLANNER'],
     }));
+
+    const onChangeText = e => {
+        const {name,value}=e.target;
+        dispatch(changeField({
+            key:name,
+            value,
+        }));
+    };
+
+    const onChangeDate = (date) =>{
+        dispatch(readPlanner(date));
+    };
+
+    const onSave = () =>{
+        dispatch(updatePlanner(planner));
+        alert("저장되었습니다.");
+    }
 
     useEffect(()=>{
         let {date} = match.params;
@@ -22,18 +41,22 @@ const PlannerContainer = ({match}) => {
         dispatch(readPlanner(date));
     },[dispatch,match.params]);
 
-    const onChangeText = async e => {
-        const {name,value}=e.target;
-        await dispatch(changeField({
-            key:name,
-            value,
-        }));
-
-        await dispatch(updatePlanner(planner));
-    };
+    useEffect(()=>{
+        return ()=>{
+            dispatch(initializeForm());
+        }
+    },[dispatch]);
 
     return (
-        <Planner planner={planner} plannerError={plannerError} loading={loading} onChangeText={onChangeText}/>
+        <Planner
+            planner={planner}
+            plannerError={plannerError}
+            loading={loading}
+            plannerDate={plannerDate}
+            onChangeText={onChangeText}
+            onChangeDate={onChangeDate}
+            onSave={onSave}
+        />
     );
 };
 

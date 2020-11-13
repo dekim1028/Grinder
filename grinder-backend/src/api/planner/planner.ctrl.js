@@ -2,21 +2,20 @@ import moment from 'moment';
 import Planner from '../../models/planner';
 
 export const getPlannerByDate = async (ctx, next) =>{
-    let {date} = ctx.request.body;
-    
+    let {date} = ctx.params;
     try{
         if(!date){
             date = moment(new Date()).format("YYYY-MM-DD");
         }
 
         let planner = await Planner.findByDate(date);
-        
+
         //플래너가 존재하지 않을 때
         if(!planner){
             planner = new Planner({
                 user: ctx.state.user,
                 dday:null,
-                date:moment(new Date()).format("YYYY-MM-DD"),
+                date:date,
                 wakeupTime:null,
                 checkList:null
             });
