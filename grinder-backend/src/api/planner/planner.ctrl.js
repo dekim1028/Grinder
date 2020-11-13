@@ -1,4 +1,3 @@
-import Joi from '@hapi/joi';
 import moment from 'moment';
 import Planner from '../../models/planner';
 
@@ -7,7 +6,7 @@ export const getPlannerByDate = async (ctx, next) =>{
     
     try{
         if(!date){
-            date = moment(new Date()).format("YYYY-DD-MM");
+            date = moment(new Date()).format("YYYY-MM-DD");
         }
 
         let planner = await Planner.findByDate(date);
@@ -17,7 +16,7 @@ export const getPlannerByDate = async (ctx, next) =>{
             planner = new Planner({
                 user: ctx.state.user,
                 dday:null,
-                date:moment(new Date()).format("YYYY-DD-MM"),
+                date:moment(new Date()).format("YYYY-MM-DD"),
                 wakeupTime:null,
                 checkList:null
             });
