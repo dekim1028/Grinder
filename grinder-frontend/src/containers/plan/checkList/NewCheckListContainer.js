@@ -1,16 +1,12 @@
-import React,{useRef,useState, useCallback,useEffect} from 'react';
-import CheckList from '../../components/plan/CheckList';
-import { useDispatch, useSelector } from 'react-redux';
-import {changeField} from '../../modules/planner';
+import React,{useState,useRef,useCallback} from 'react';
+import { useDispatch } from 'react-redux';
+import { changeField } from '../../../modules/planner';
+import NewCheckList from '../../../components/plan/checkList/NewCheckList';
 
-const CheckListContainer = () => {
+const NewCheckListContainer = ({checkList}) => {
     const dispatch = useDispatch();
-
-    const {checkList} = useSelector(({planner})=>({
-        checkList:planner.planner.checkList
-    }));
-    let startId = useRef(checkList?checkList.length+1:1);
     const [newCheckList,setNewCheckList] = useState([]);
+    let startId = useRef(checkList?checkList.length+1:1);
 
     const onAdd = useCallback(() =>{
         const newArr = {
@@ -49,20 +45,15 @@ const CheckListContainer = () => {
         }));
     };
 
-    useEffect(()=>{
-        setNewCheckList([]);
-    },[checkList]);
-
     return (
-        <CheckList
-            checkList={checkList}
+        <NewCheckList
             newCheckList={newCheckList}
             onAdd={onAdd}
-            onDelete={onDelete}
             onChange={onChange}
+            onDelete={onDelete}
             onSubmit={onSubmit}
         />
     );
 };
 
-export default CheckListContainer;
+export default NewCheckListContainer;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {MdRemoveCircleOutline} from 'react-icons/md';
 
-const AddBox = styled.div`
+const NewItemBlock = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -34,9 +34,9 @@ const AddBox = styled.div`
     }
 `;
 
-const CheckListAddBox = ({item, onDelete, onChange}) => {
+const NewCheckListItem = ({item, onDelete, onChange}) => {
     return (
-        <AddBox>
+        <NewItemBlock>
             <MdRemoveCircleOutline onClick={()=>onDelete(item.id)}/>
             <select id={item.id} name="subject" onChange={onChange}>
                 <option value="수학">수학</option>
@@ -46,8 +46,8 @@ const CheckListAddBox = ({item, onDelete, onChange}) => {
                 <option value="한국사">한국사</option>
             </select>
             <input type="text" id={item.id} name="content" onChange={onChange}/>
-        </AddBox>
+        </NewItemBlock>
     );
 };
 
-export default CheckListAddBox;
+export default NewCheckListItem;

@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import PlannerContent from './PlannerContent';
-import CheckListContainer from '../../containers/plan/CheckListContainer';
+import CheckListContainer from '../../containers/plan/checkList/CheckListContainer';
 import Button from '../common/Button';
 
 const PlannerBlock = styled.div`
