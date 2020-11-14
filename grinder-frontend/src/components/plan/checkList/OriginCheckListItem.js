@@ -21,6 +21,12 @@ const OriginItemBlock = styled.div`
     .content{
         width: 100%;
         padding-left:5px;
+        cursor: pointer;
+    }
+
+    .content:hover{
+        color:#135461;
+        font-weight:bold;
     }
 `;
 
@@ -28,7 +34,7 @@ const OriginCheckListItem = ({item,onClick}) => {
     return (
         <OriginItemBlock>
             <div className="subject category">{item.subject}</div>
-            <div className="content" onClick={()=>onClick(item)}>{item.content}</div>
+            <div className="content" onClick={onClick}>{item.content}</div>
             <input className="checkbox" type="checkbox" value={item.check}/>
         </OriginItemBlock>
     );

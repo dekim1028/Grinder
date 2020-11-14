@@ -32,6 +32,8 @@ const PlannerContentBlock = styled.div`
         
         .react-datepicker__input-container input{
             ${inputStyle};
+            caret-color: transparent;
+            cursor: pointer;
         }
     }
 `;

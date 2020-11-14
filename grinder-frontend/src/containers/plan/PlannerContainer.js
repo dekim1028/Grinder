@@ -5,6 +5,7 @@ import { readPlanner } from '../../modules/planner';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import {initializeForm, changeField, updatePlanner} from '../../modules/planner';
+import { readChecklist } from '../../modules/checklist';
 
 const PlannerContainer = ({history,match}) => {
     const dispatch = useDispatch();
@@ -40,6 +41,13 @@ const PlannerContainer = ({history,match}) => {
         }
         dispatch(readPlanner(date));
     },[dispatch,match.params]);
+
+    useEffect(()=>{
+        if(planner){
+            const id = planner._id;
+            dispatch(readChecklist(id));
+        }
+    },[dispatch,planner]);
 
     useEffect(()=>{
         return ()=>{

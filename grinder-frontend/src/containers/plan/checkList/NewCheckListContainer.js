@@ -1,12 +1,15 @@
 import React,{useState,useRef,useCallback} from 'react';
-import { useDispatch } from 'react-redux';
-import { changeField } from '../../../modules/planner';
+import { useSelector, useDispatch } from 'react-redux';
 import NewCheckList from '../../../components/plan/checkList/NewCheckList';
+import { updateChecklist } from '../../../modules/checklist';
 
-const NewCheckListContainer = ({checkList}) => {
+const NewCheckListContainer = () => {
     const dispatch = useDispatch();
     const [newCheckList,setNewCheckList] = useState([]);
-    let startId = useRef(checkList?checkList.length+1:1);
+    const {checklist} = useSelector(({checklist})=>({
+        checklist:checklist.checklist
+    }));
+    let startId = useRef(0);
 
     const onAdd = useCallback(() =>{
         const newArr = {
@@ -39,10 +42,10 @@ const NewCheckListContainer = ({checkList}) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        dispatch(changeField({
-            key:"checkList",
-            value:checkList?checkList.concat(newCheckList):newCheckList,
-        }));
+        const {list} = checklist;
+        const newArr = list?list.concat(newCheckList):newCheckList;
+        dispatch(updateChecklist({...checklist,list:newArr}));
+        setNewCheckList([]);
     };
 
     return (

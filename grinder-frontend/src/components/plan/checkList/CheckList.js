@@ -8,11 +8,11 @@ const CheckListBlock =styled.div`
     margin-top:15px;
 `;
 
-const CheckList = ({checkList}) => {
+const CheckList = () => {
     return (
         <CheckListBlock>
-            <OriginCheckListContainer checkList={checkList}/>
-            <NewCheckListContainer checkList={checkList}/>
+            <OriginCheckListContainer/>
+            <NewCheckListContainer/>
         </CheckListBlock>
     );
 };

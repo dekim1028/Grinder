@@ -1,13 +1,15 @@
 import React from 'react';
 import OriginCheckListItem from './OriginCheckListItem';
 
-const OriginCheckList = ({checkList,onClick}) => {
+const OriginCheckList = ({checklist,onClick}) => {
+    
+    if(!checklist) return null;
     return (
         <>
             {
-                checkList &&
-                    checkList.map((item)=>(
-                        <OriginCheckListItem key={`originCheckList_${item._id}`} item={item}/>
+                checklist.list &&
+                    checklist.list.map((item)=>(
+                        <OriginCheckListItem key={`originCheckList_${item._id}`} item={item} onClick={()=>onClick(item._id)}/>
                     ))
             }
         </>

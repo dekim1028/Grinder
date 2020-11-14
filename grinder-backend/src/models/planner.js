@@ -8,17 +8,7 @@ const PlannerSchema = new Schema({
     dday:String,
     date:String,
     wakeupTime:String,
-    studyTime:String,
-    checkList:[{
-        subject:String,
-        content:String,
-        check:{
-            type:Boolean,
-            default:false,
-        },
-        startTime:String,
-        endTime:String,
-    }]
+    studyTime:String
 });
 
 PlannerSchema.statics.findByDate = function(date){

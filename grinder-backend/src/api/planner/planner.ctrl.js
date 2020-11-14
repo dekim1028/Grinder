@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Planner from '../../models/planner';
+import CheckList from '../../models/checkList';
 
 export const getPlannerByDate = async (ctx, next) =>{
     let {date} = ctx.params;
@@ -16,8 +17,7 @@ export const getPlannerByDate = async (ctx, next) =>{
                 user: ctx.state.user,
                 dday:null,
                 date:date,
-                wakeupTime:null,
-                checkList:null
+                wakeupTime:null
             });
         
             try{
