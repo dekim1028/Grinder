@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import WorkSelectionModal from '../../../components/plan/checkList/WorkSelectionModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateChecklist } from '../../../modules/checklist';
 
-const WorkSelectionModalContiner = ({visible,checklist,target,onClick}) => {
+const WorkSelectionModalContiner = ({visible,target,onVisible}) => {
     const dispatch = useDispatch();
-    const [status,setStatus]=useState('');
+    const [targetItem,setTargetItem] = useState(null);
+    const [status,setStatus] = useState('');
+
+    const {checklist} = useSelector(({checklist})=>({
+        checklist:checklist.checklist
+    }));
+
+    const onChange = e =>{
+        
+    };
 
     const onUpdate = () =>{
-        setStatus('update');
+
     };
 
     const onDelete = () =>{
-        setStatus('delete');
         const {list} = checklist;
         const newArr = list.filter(item=>{
             return item._id!==target;
@@ -22,17 +30,36 @@ const WorkSelectionModalContiner = ({visible,checklist,target,onClick}) => {
     };
 
     const onConfirm = () =>{
-        if(status==='update'){
-
-        }else{
-
-        }
+        onVisible('');
         setStatus('');
-        onClick('');
-    }
+    };
+
+    const onChangeStatus = type =>{
+        setStatus(type);
+        if(type==='delete'){
+            onDelete();
+        }
+    };
+
+    useEffect(()=>{
+        if(checklist){
+            const {list} = checklist;
+            setTargetItem(list.filter(item=>{
+                return item._id===target;
+            })[0]);
+        }
+    },[checklist,target]);
 
     return (
-        <WorkSelectionModal visible={visible} status={status} onClick={onClick} onUpdate={onUpdate} onDelete={onDelete} onConfirm={onConfirm}/>
+        <WorkSelectionModal
+            visible={visible}
+            targetItem={targetItem}
+            status={status}
+            onChange={onChange}
+            onUpdate={onUpdate}
+            onConfirm={onConfirm}
+            onChangeStatus={onChangeStatus}
+        />
     );
 };
 

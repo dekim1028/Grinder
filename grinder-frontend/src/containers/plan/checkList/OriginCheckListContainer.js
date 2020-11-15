@@ -11,15 +11,15 @@ const OriginCheckListContainer = () => {
         checklist:checklist.checklist
     }));
     
-    const onClick = id => {
+    const onVisible = id => {
         setVisible(!visible);
         setTarget(id);
     };
 
     return (
         <>
-            <OriginCheckList checklist={checklist} onClick={onClick}/>
-            <WorkSelectionModalContiner visible={visible} checklist={checklist} target={target} onClick={onClick}/>
+            <OriginCheckList checklist={checklist} onVisible={onVisible}/>
+            <WorkSelectionModalContiner visible={visible} target={target} onVisible={onVisible}/>
         </>
     );
 };

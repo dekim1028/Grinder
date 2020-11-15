@@ -1,7 +1,7 @@
 import React from 'react';
 import OriginCheckListItem from './OriginCheckListItem';
 
-const OriginCheckList = ({checklist,onClick}) => {
+const OriginCheckList = ({checklist,onVisible}) => {
     
     if(!checklist) return null;
     return (
@@ -9,7 +9,7 @@ const OriginCheckList = ({checklist,onClick}) => {
             {
                 checklist.list &&
                     checklist.list.map((item)=>(
-                        <OriginCheckListItem key={`originCheckList_${item._id}`} item={item} onClick={()=>onClick(item._id)}/>
+                        <OriginCheckListItem key={`originCheckList_${item._id}`} item={item} onClick={()=>onVisible(item._id)}/>
                     ))
             }
         </>

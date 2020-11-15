@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 import {RiCloseLine} from 'react-icons/ri';
+import UpdateChecklist from './UpdateChecklist';
 
 const ModalBackBlock = styled.div`
     position:fixed;
@@ -69,45 +70,41 @@ const ConfirmBtn = styled(Button)`
     ${ModalBtnStyle}
 `;
 
-const WorkSelectionModal = ({visible,status,onClick,onUpdate,onDelete,onConfirm}) => {
+const WorkSelectionModal = ({visible,targetItem,status,onChange,onUpdate,onConfirm,onChangeStatus}) => {
+
     if(!visible) return null;
     return (
         <ModalBackBlock>
             <ModalBlock>
                 <ModalTitle>
-                    <RiCloseLine onClick={onClick}/>
+                    <RiCloseLine onClick={onConfirm}/>
                 </ModalTitle>
-                <ModalContent>
                     {
                         status===''?(
-                            <div className="content">
-                                원하시는 작업을 선택하세요
-                            </div>
+                            <ModalContent>
+                                <div className="content">
+                                    원하시는 작업을 선택하세요
+                                </div>
+                                <ButtonBlock>
+                                    <ConfirmBtn onClick={()=>onChangeStatus('update')}>수정</ConfirmBtn>
+                                    <CancelBtn onClick={()=>onChangeStatus('delete')}>삭제</CancelBtn>
+                                </ButtonBlock>
+                            </ModalContent>
                         ):status==='update'?(
-                            <div>수정</div>
+                            <ModalContent>
+                                <UpdateChecklist targetItem={targetItem} onUpdate={onUpdate} onChange={onChange}/>
+                            </ModalContent>
                         ):(
-                            <div className="content">
-                                삭제되었습니다
-                            </div>
+                            <ModalContent>
+                                <div className="content">
+                                    삭제되었습니다
+                                </div>
+                                <ButtonBlock>
+                                    <CancelBtn onClick={onConfirm}>확인</CancelBtn>
+                                </ButtonBlock>
+                            </ModalContent>
                         )
                     }
-                    {
-                        status===''?(
-                            <ButtonBlock>
-                                <ConfirmBtn onClick={onUpdate}>수정</ConfirmBtn>
-                                <CancelBtn onClick={onDelete}>삭제</CancelBtn>
-                            </ButtonBlock>
-                        ):status==='update'?(
-                            <ButtonBlock>
-                                <ConfirmBtn onClick={onConfirm}>변경</ConfirmBtn>
-                            </ButtonBlock>
-                        ):(
-                            <ButtonBlock>
-                                <CancelBtn onClick={onConfirm}>확인</CancelBtn>
-                            </ButtonBlock>
-                        )
-                    }
-                </ModalContent>
             </ModalBlock>
         </ModalBackBlock>
     );
