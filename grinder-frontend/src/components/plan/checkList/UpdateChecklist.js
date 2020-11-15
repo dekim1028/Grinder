@@ -76,7 +76,7 @@ const ConfirmBtn = styled(Button)`
 `;
 
 
-const UpdateChecklist = ({targetItem,onUpdate,onChange}) => {
+const UpdateChecklist = ({target,onChange,onUpdate}) => {
     
     const [startTime,setStartTime] = useState('10:00');
     const [endTime,setEndTime] = useState('18:00');
@@ -84,10 +84,11 @@ const UpdateChecklist = ({targetItem,onUpdate,onChange}) => {
     const onChangeStartTime = time => setStartTime(startTime);
     const onChangeEndTime = time => setEndTime(endTime);
 
+    if(!target) return null;
     return (
         <UpdateChecklistBlock>
             <InputBlock>
-                <select className="subject" name="subject" value={targetItem.subject} onChange={onChange}>
+                <select className="subject" name="subject" value={target.subject} onChange={onChange}>
                     <option value="수학">수학</option>
                     <option value="국어">국어</option>
                     <option value="영어">영어</option>
@@ -96,7 +97,7 @@ const UpdateChecklist = ({targetItem,onUpdate,onChange}) => {
                 </select>
             </InputBlock>
             <InputBlock>
-                <input className="content" type="text" name="content" value={targetItem.content} onChange={onChange}/>
+                <input className="content" type="text" name="content" value={target.content} onChange={onChange}/>
             </InputBlock>
             <InputBlock>
                 <TimeBlock>

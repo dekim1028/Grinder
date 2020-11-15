@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 import {RiCloseLine} from 'react-icons/ri';
-import UpdateChecklist from './UpdateChecklist';
+import UpdateCheclistContainer from '../../../containers/plan/checkList/UpdateCheclistContainer';
 
 const ModalBackBlock = styled.div`
     position:fixed;
@@ -38,7 +38,7 @@ const ModalTitle = styled.div`
 `;
 
 const ModalContent = styled.div`
-    .content{
+    .modalText{
         text-align:center;
     }
 `;
@@ -70,7 +70,7 @@ const ConfirmBtn = styled(Button)`
     ${ModalBtnStyle}
 `;
 
-const WorkSelectionModal = ({visible,targetItem,status,onChange,onUpdate,onConfirm,onChangeStatus}) => {
+const WorkSelectionModal = ({visible,targetItem,status,onConfirm,onChangeStatus}) => {
 
     if(!visible) return null;
     return (
@@ -82,7 +82,7 @@ const WorkSelectionModal = ({visible,targetItem,status,onChange,onUpdate,onConfi
                     {
                         status===''?(
                             <ModalContent>
-                                <div className="content">
+                                <div className="modalText">
                                     원하시는 작업을 선택하세요
                                 </div>
                                 <ButtonBlock>
@@ -92,11 +92,11 @@ const WorkSelectionModal = ({visible,targetItem,status,onChange,onUpdate,onConfi
                             </ModalContent>
                         ):status==='update'?(
                             <ModalContent>
-                                <UpdateChecklist targetItem={targetItem} onUpdate={onUpdate} onChange={onChange}/>
+                                <UpdateCheclistContainer targetItem={targetItem} onConfirm={onConfirm}/>
                             </ModalContent>
                         ):(
                             <ModalContent>
-                                <div className="content">
+                                <div className="modalText">
                                     삭제되었습니다
                                 </div>
                                 <ButtonBlock>

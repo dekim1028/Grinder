@@ -5,3 +5,6 @@ export const read = id =>
 
 export const update = (checkList) =>
     client.patch("/api/checklist/",checkList);
+
+export const updateItem = ({id,item}) =>
+    client.patch(`/api/checklist/${id}`,item);

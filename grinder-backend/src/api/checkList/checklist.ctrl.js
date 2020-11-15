@@ -56,3 +56,35 @@ export const update = async ctx => {
         ctx.throw(500,e);
     }
 };
+
+/*
+    PATCH /api/checklist/:id
+*/
+export const updateItem = async ctx =>{
+    const {id} = ctx.params;
+    const item = ctx.request.body;
+    
+    const {subject,content} = item;
+
+    try{
+        const checklist = await CheckList.findByIdAndUpdate(
+            id,
+            { $set:{"list.$[w].subject": subject,"list.$[w].content": content}}, 
+            {
+                arrayFilters: [{
+                    "w._id": item._id
+                 }],
+                new:true,
+            }
+        ).exec();
+
+        if(!checklist){
+            ctx.status = 404;
+            return;
+        }
+        ctx.body = checklist;
+
+    }catch(e){
+        ctx.throw(500,e);
+    }
+};

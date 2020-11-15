@@ -6,5 +6,6 @@ const checklist = new Router();
 
 checklist.get('/:id', checkLoggedIn, checklistCtrl.getChecklistById, checklistCtrl.read);
 checklist.patch('/', checkLoggedIn, checklistCtrl.update);
+checklist.patch('/:id', checkLoggedIn, checklistCtrl.updateItem);
 
 export default checklist;

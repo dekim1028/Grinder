@@ -12,14 +12,6 @@ const WorkSelectionModalContiner = ({visible,target,onVisible}) => {
         checklist:checklist.checklist
     }));
 
-    const onChange = e =>{
-        
-    };
-
-    const onUpdate = () =>{
-
-    };
-
     const onDelete = () =>{
         const {list} = checklist;
         const newArr = list.filter(item=>{
@@ -44,9 +36,11 @@ const WorkSelectionModalContiner = ({visible,target,onVisible}) => {
     useEffect(()=>{
         if(checklist){
             const {list} = checklist;
-            setTargetItem(list.filter(item=>{
-                return item._id===target;
-            })[0]);
+            if(list){
+                setTargetItem(list.filter(item=>{
+                    return item._id===target;
+                })[0]);
+            }
         }
     },[checklist,target]);
 
@@ -55,8 +49,6 @@ const WorkSelectionModalContiner = ({visible,target,onVisible}) => {
             visible={visible}
             targetItem={targetItem}
             status={status}
-            onChange={onChange}
-            onUpdate={onUpdate}
             onConfirm={onConfirm}
             onChangeStatus={onChangeStatus}
         />
