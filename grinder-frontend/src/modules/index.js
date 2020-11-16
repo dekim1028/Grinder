@@ -4,18 +4,18 @@ import loading from './loading';
 import auth,{ authSaga } from './auth';
 import user,{ userSaga } from "./user";
 import planner,{ plannerSaga } from "./planner";
-import checklist,{ checklistSaga } from "./checklist";
+import checkList,{ checkListSaga } from "./checkList";
 
 const rootReducer = combineReducers({
     loading,
     auth,
     user,
     planner,
-    checklist,
+    checkList,
 });
 
 export function* rootSaga(){
-    yield all([authSaga(),userSaga(),plannerSaga(),checklistSaga()]);
+    yield all([authSaga(),userSaga(),plannerSaga(),checkListSaga()]);
 };
 
 export default rootReducer;

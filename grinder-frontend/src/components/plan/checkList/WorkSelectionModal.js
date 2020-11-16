@@ -70,7 +70,7 @@ const ConfirmBtn = styled(Button)`
     ${ModalBtnStyle}
 `;
 
-const WorkSelectionModal = ({visible,targetItem,status,onConfirm,onChangeStatus}) => {
+const WorkSelectionModal = ({visible,status,onConfirm,onChangeStatus}) => {
 
     if(!visible) return null;
     return (
@@ -92,7 +92,7 @@ const WorkSelectionModal = ({visible,targetItem,status,onConfirm,onChangeStatus}
                             </ModalContent>
                         ):status==='update'?(
                             <ModalContent>
-                                <UpdateCheclistContainer targetItem={targetItem} onConfirm={onConfirm}/>
+                                <UpdateCheclistContainer onConfirm={onConfirm}/>
                             </ModalContent>
                         ):(
                             <ModalContent>

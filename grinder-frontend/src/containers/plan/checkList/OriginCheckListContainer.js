@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import OriginCheckList from '../../../components/plan/checkList/OriginCheckList';
 import WorkSelectionModalContiner from './WorkSelectionModalContiner';
+import {setUpdateTarget} from '../../../modules/checkList';
 
 const OriginCheckListContainer = () => {
+    const dispatch = useDispatch();
     const [visible,setVisible] = useState(false);
-    const [target,setTarget] = useState(null);
 
-    const {checklist} = useSelector(({checklist})=>({
-        checklist:checklist.checklist
+    const {checklist} = useSelector(({checkList})=>({
+        checklist:checkList.checklist
     }));
     
     const onVisible = id => {
         setVisible(!visible);
-        setTarget(id);
+        if(checklist){
+            const {list} = checklist;
+            dispatch(setUpdateTarget(list.filter(item=>item._id===id)[0]));
+        }
     };
 
     return (
         <>
             <OriginCheckList checklist={checklist} onVisible={onVisible}/>
-            <WorkSelectionModalContiner visible={visible} target={target} onVisible={onVisible}/>
+            <WorkSelectionModalContiner visible={visible} onVisible={onVisible}/>
         </>
     );
 };

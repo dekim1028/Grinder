@@ -1,14 +1,14 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import UpdateChecklist from '../../../components/plan/checkList/UpdateChecklist';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUpdateTarget, setUpdateTarget, updateChecklistItem } from '../../../modules/checklist';
+import { changeUpdateTarget, updateChecklistItem } from '../../../modules/checkList';
 
-const UpdateCheclistContainer = ({targetItem,onConfirm}) => {
+const UpdateCheclistContainer = ({onConfirm}) => {
     const dispatch = useDispatch();
 
-    const {checklist,updateTarget} = useSelector(({checklist})=>({
-        checklist:checklist.checklist,
-        updateTarget:checklist.updateTarget
+    const {checklist,updateTarget} = useSelector(({checkList})=>({
+        checklist:checkList.checklist,
+        updateTarget:checkList.updateTarget
     }));
 
     const onChange = e =>{
@@ -27,10 +27,6 @@ const UpdateCheclistContainer = ({targetItem,onConfirm}) => {
         alert("수정되었습니다.");
         onConfirm();
     };
-
-    useEffect(()=>{
-        dispatch(setUpdateTarget(targetItem));
-    },[dispatch,targetItem])
 
     return (
         <UpdateChecklist target={updateTarget} onChange={onChange} onUpdate={onUpdate}/>

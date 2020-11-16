@@ -1,13 +1,13 @@
 import React,{useState,useRef,useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import NewCheckList from '../../../components/plan/checkList/NewCheckList';
-import { updateChecklist } from '../../../modules/checklist';
+import { updateChecklist } from '../../../modules/checkList';
 
 const NewCheckListContainer = () => {
     const dispatch = useDispatch();
     const [newCheckList,setNewCheckList] = useState([]);
-    const {checklist} = useSelector(({checklist})=>({
-        checklist:checklist.checklist
+    const {checklist} = useSelector(({checkList})=>({
+        checklist:checkList.checklist
     }));
     let startId = useRef(0);
 

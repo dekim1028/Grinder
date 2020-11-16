@@ -26,7 +26,7 @@ const readChecklistSaga = createRequestSaga(READ_CHECKLIST,checklistAPI.read);
 const updateChecklistSaga = createRequestSaga(UPDATE_CHECKLIST,checklistAPI.update);
 const updateChecklistItemSaga = createRequestSaga(UPDATE_CHECKLIST_ITEM,checklistAPI.updateItem);
 
-export function* checklistSaga(){
+export function* checkListSaga(){
     yield takeLatest(READ_CHECKLIST,readChecklistSaga);
     yield takeLatest(UPDATE_CHECKLIST,updateChecklistSaga);
     yield takeLatest(UPDATE_CHECKLIST_ITEM,updateChecklistItemSaga);
@@ -38,7 +38,7 @@ const initialState = {
     updateTarget:null,
 };
 
-const checklist = handleActions({
+const checkList = handleActions({
     [READ_CHECKLIST_SUCCESS]:(state,{payload:checklist})=>({
         ...state,
         checklist
@@ -73,4 +73,4 @@ const checklist = handleActions({
     })
 },initialState);
 
-export default checklist;
+export default checkList;

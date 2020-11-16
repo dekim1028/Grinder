@@ -5,7 +5,7 @@ import { readPlanner } from '../../modules/planner';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import {initializeForm, changeField, updatePlanner} from '../../modules/planner';
-import { readChecklist } from '../../modules/checklist';
+import { readChecklist } from '../../modules/checkList';
 
 const PlannerContainer = ({history,match}) => {
     const dispatch = useDispatch();
