@@ -16,6 +16,9 @@ const NewCheckListContainer = () => {
             id:startId.current,
             subject:null,
             content:null,
+            check:false,
+            startTime:null,
+            endTime:null,
         };
         setNewCheckList(newCheckList.concat(newArr));
         startId.current+=1;
@@ -43,7 +46,9 @@ const NewCheckListContainer = () => {
     const onSubmit = e => {
         e.preventDefault();
         const {list} = checklist;
-        const newArr = list?list.concat(newCheckList):newCheckList;
+        const newArr = list?list.concat(newCheckList.filter(
+            item=>(item.content!==null && item.content!=='')
+        )):newCheckList;
         dispatch(updateChecklist({...checklist,list:newArr}));
         setNewCheckList([]);
     };

@@ -19,6 +19,20 @@ const UpdateCheclistContainer = ({onConfirm}) => {
         }));
     };
 
+    const onChangeStartTime = time =>{
+        dispatch(changeUpdateTarget({
+            key:"startTime",
+            value:time
+        }));
+    };
+
+    const onChangeEndTime = time =>{
+        dispatch(changeUpdateTarget({
+            key:"endTime",
+            value:time
+        }));
+    };
+
     const onUpdate = () =>{
         dispatch(updateChecklistItem({
             id:checklist._id,
@@ -29,7 +43,13 @@ const UpdateCheclistContainer = ({onConfirm}) => {
     };
 
     return (
-        <UpdateChecklist target={updateTarget} onChange={onChange} onUpdate={onUpdate}/>
+        <UpdateChecklist
+            target={updateTarget}
+            onChange={onChange}
+            onChangeStartTime={onChangeStartTime}
+            onChangeEndTime={onChangeEndTime}
+            onUpdate={onUpdate}
+        />
     );
 };
 

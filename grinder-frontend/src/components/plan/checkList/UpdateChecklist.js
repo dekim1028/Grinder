@@ -76,13 +76,7 @@ const ConfirmBtn = styled(Button)`
 `;
 
 
-const UpdateChecklist = ({target,onChange,onUpdate}) => {
-    
-    const [startTime,setStartTime] = useState('10:00');
-    const [endTime,setEndTime] = useState('18:00');
-     
-    const onChangeStartTime = time => setStartTime(startTime);
-    const onChangeEndTime = time => setEndTime(endTime);
+const UpdateChecklist = ({target,onChange,onChangeStartTime,onChangeEndTime,onUpdate}) => {
 
     if(!target) return null;
     return (
@@ -102,12 +96,14 @@ const UpdateChecklist = ({target,onChange,onUpdate}) => {
             <InputBlock>
                 <TimeBlock>
                     <TimePicker
-                        value={startTime}
+                        name="startTime"
+                        value={target.startTime}
                         onChange={onChangeStartTime}
                     />
                     ~
                     <TimePicker
-                        value={endTime}
+                        name="endTime"
+                        value={target.endTime}
                         onChange={onChangeEndTime}
                     />
                 </TimeBlock>

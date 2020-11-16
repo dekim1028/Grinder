@@ -17,8 +17,7 @@ const WorkSelectionModalContiner = ({visible,onVisible}) => {
         const newArr = list.filter(item=>{
             return item._id!==updateTarget._id;
         });
-        checklist.list = newArr;
-        dispatch(updateChecklist(checklist));
+        dispatch(updateChecklist({...checklist,list:newArr}));
     };
 
     const onConfirm = () =>{

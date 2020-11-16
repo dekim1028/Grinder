@@ -64,12 +64,12 @@ export const updateItem = async ctx =>{
     const {id} = ctx.params;
     const item = ctx.request.body;
     
-    const {subject,content} = item;
+    const {subject,content,startTime,endTime} = item;
 
     try{
         const checklist = await CheckList.findByIdAndUpdate(
             id,
-            { $set:{"list.$[w].subject": subject,"list.$[w].content": content}}, 
+            { $set:{"list.$[w].subject": subject,"list.$[w].content": content,"list.$[w].startTime": startTime,"list.$[w].endTime": endTime}}, 
             {
                 arrayFilters: [{
                     "w._id": item._id
