@@ -6,17 +6,28 @@ import { changeUpdateTarget, updateChecklistItem } from '../../../modules/checkL
 const UpdateCheclistContainer = ({onConfirm}) => {
     const dispatch = useDispatch();
 
-    const {checklist,updateTarget} = useSelector(({checkList})=>({
+    const {checklist,updateTarget,settings} = useSelector(({checkList,settings})=>({
         checklist:checkList.checklist,
-        updateTarget:checkList.updateTarget
+        updateTarget:checkList.updateTarget,
+        settings:settings.settings
     }));
 
     const onChange = e =>{
         const {name,value} = e.target;
-        dispatch(changeUpdateTarget({
-            key:name,
-            value
-        }));
+
+        if(name==="subject"){
+            const {SubjectCategory} = settings;
+            const selected = SubjectCategory.filter(item=>item._id===value)[0];
+            const {_id,color,subject} = selected;
+            dispatch(changeUpdateTarget({key:"subjectCategoryId",value:_id}));
+            dispatch(changeUpdateTarget({key:"color",value:color}));
+            dispatch(changeUpdateTarget({key:"subject",value:subject}));
+        }else{
+            dispatch(changeUpdateTarget({
+                key:name,
+                value
+            }));
+        }
     };
 
     const onChangeStartTime = time =>{
@@ -45,6 +56,7 @@ const UpdateCheclistContainer = ({onConfirm}) => {
     return (
         <UpdateChecklist
             target={updateTarget}
+            subjectCategory={settings.SubjectCategory}
             onChange={onChange}
             onChangeStartTime={onChangeStartTime}
             onChangeEndTime={onChangeEndTime}

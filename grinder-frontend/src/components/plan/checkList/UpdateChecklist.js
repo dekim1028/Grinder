@@ -76,18 +76,20 @@ const ConfirmBtn = styled(Button)`
 `;
 
 
-const UpdateChecklist = ({target,onChange,onChangeStartTime,onChangeEndTime,onUpdate}) => {
+const UpdateChecklist = ({target,subjectCategory,onChange,onChangeStartTime,onChangeEndTime,onUpdate}) => {
 
     if(!target) return null;
     return (
         <UpdateChecklistBlock>
             <InputBlock>
-                <select className="subject" name="subject" value={target.subject} onChange={onChange}>
-                    <option value="수학">수학</option>
-                    <option value="국어">국어</option>
-                    <option value="영어">영어</option>
-                    <option value="과학">과학</option>
-                    <option value="한국사">한국사</option>
+                <select className="subject" name="subject" value={target.subjectCategoryId} onChange={onChange}>
+                    <option hidden defaultValue>과목</option>
+                    {
+                        subjectCategory&&
+                        subjectCategory.map(category=>(
+                            <option key={category._id} value={category._id} data-color={category.color}>{category.subject}</option>
+                        ))
+                    }
                 </select>
             </InputBlock>
             <InputBlock>

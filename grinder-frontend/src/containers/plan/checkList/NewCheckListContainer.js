@@ -15,12 +15,13 @@ const NewCheckListContainer = () => {
     const onAdd = useCallback(() =>{
         const newArr = {
             id:startId.current,
-            color:null,
-            subject:null,
-            content:null,
+            subjectCategoryId:"",
+            color:"",
+            subject:"",
+            content:"",
             check:false,
-            startTime:null,
-            endTime:null,
+            startTime:"",
+            endTime:"",
         };
         setNewCheckList(newCheckList.concat(newArr));
         startId.current+=1;
@@ -34,7 +35,8 @@ const NewCheckListContainer = () => {
                     if(name==="subject"){
                         const {SubjectCategory} = settings;
                         const selected = SubjectCategory.filter(item=>item._id===value)[0];
-                        const {color,subject} = selected;
+                        const {_id,color,subject} = selected;
+                        item.subjectCategoryId = _id;
                         item.color = color;
                         item.subject = subject;
                     }else{
@@ -57,7 +59,7 @@ const NewCheckListContainer = () => {
         e.preventDefault();
         
         const filterList = newCheckList.filter(
-            item=>(item.subject!==null && item.subject!=='' && item.content!==null && item.content!=='')
+            item=>(item.subject!=='' && item.content!=='')
         );
 
         dispatch(addChecklistItem({

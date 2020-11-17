@@ -38,7 +38,7 @@ const NewCheckListItem = ({subjectCategory, item, onDelete, onChange}) => {
     return (
         <NewItemBlock>
             <MdRemoveCircleOutline onClick={()=>onDelete(item.id)}/>
-            <select id={item.id} name="subject" onChange={onChange}>
+            <select id={item.id} name="subject" value={item.subjectCategoryId} onChange={onChange}>
                 <option hidden defaultValue>과목</option>
                 {
                     subjectCategory&&
@@ -47,7 +47,7 @@ const NewCheckListItem = ({subjectCategory, item, onDelete, onChange}) => {
                     ))
                 }
             </select>
-            <input type="text" id={item.id} name="content" onChange={onChange}/>
+            <input type="text" id={item.id} name="content" value={item.content} onChange={onChange}/>
         </NewItemBlock>
     );
 };
