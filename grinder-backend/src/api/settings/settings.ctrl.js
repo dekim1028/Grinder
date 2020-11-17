@@ -12,23 +12,23 @@ export const getSettingsById = async (ctx, next) =>{
                 user: ctx.state.user,
                 SubjectCategory:[
                     {
-                        color:"#ff6347",
+                        color:"#F5A9A9",
                         subject:"국어"
                     },
                     {
-                        color:"#ffa500",
+                        color:"#F5D0A9",
                         subject:"수학"
                     },
                     {
-                        color:"#ffd700",
+                        color:"#F2F5A9",
                         subject:"영어"
                     },
                     {
-                        color:"#0404B4",
+                        color:"#A9F5F2",
                         subject:"과학"
                     },
                     {
-                        color:"#31B404",
+                        color:"#A9F5A9",
                         subject:"한국사"
                     }
                 ]

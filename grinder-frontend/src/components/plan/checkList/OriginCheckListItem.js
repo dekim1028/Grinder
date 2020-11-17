@@ -14,8 +14,8 @@ const OriginItemBlock = styled.div`
     }
 
     .category{
-        border-bottom: 1px solid #b0e0e6;
-        box-shadow: inset 0 -10px 0 #b0e0e6;
+        border-bottom: 1px solid;
+        box-shadow: inset 0 -10px 0;
     }
 
     .content{
@@ -33,7 +33,7 @@ const OriginItemBlock = styled.div`
 const OriginCheckListItem = ({item,onClick}) => {
     return (
         <OriginItemBlock>
-            <div className="subject category">{item.subject}</div>
+            <div className="subject category" style={{borderBottomColor:item.color,boxShadow:`inset 0 -10px 0 ${item.color}`}}>{item.subject}</div>
             <div className="content" onClick={onClick}>{item.content}</div>
             <input className="checkbox" type="checkbox" value={item.check}/>
         </OriginItemBlock>
