@@ -1,6 +1,5 @@
 import moment from 'moment';
 import Planner from '../../models/planner';
-import CheckList from '../../models/checkList';
 
 export const getPlannerByDate = async (ctx, next) =>{
     let {date} = ctx.params;

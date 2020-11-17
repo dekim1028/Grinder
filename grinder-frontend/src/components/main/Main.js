@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import {FiBook,FiSettings} from 'react-icons/fi';
 import cn from 'classnames';
 import Profile from './Profile';
-import Overview from './Overview';
-import Settings from './Settings';
+import SettingsContainer from '../../containers/main/SettingsContainer';
+import OverviewContainer from '../../containers/main/OverviewContainer';
 
 const MainBlock = styled.div`
     display:flex;
@@ -68,9 +68,9 @@ const Main = ({user}) => {
                 </MainHeader>
                 {
                     click?(
-                        <Overview/>
+                        <OverviewContainer/>
                     ):(
-                        <Settings/>
+                        <SettingsContainer/>
                     )
                 }
             </ContentBlock>

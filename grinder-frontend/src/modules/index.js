@@ -5,6 +5,7 @@ import auth,{ authSaga } from './auth';
 import user,{ userSaga } from "./user";
 import planner,{ plannerSaga } from "./planner";
 import checkList,{ checkListSaga } from "./checkList";
+import settings, { settingsSaga } from "./settings";
 
 const rootReducer = combineReducers({
     loading,
@@ -12,10 +13,11 @@ const rootReducer = combineReducers({
     user,
     planner,
     checkList,
+    settings
 });
 
 export function* rootSaga(){
-    yield all([authSaga(),userSaga(),plannerSaga(),checkListSaga()]);
+    yield all([authSaga(),userSaga(),plannerSaga(),checkListSaga(),settingsSaga()]);
 };
 
 export default rootReducer;
