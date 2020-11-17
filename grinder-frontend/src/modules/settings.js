@@ -40,7 +40,7 @@ const initialState = {
     settingsError:null,
     categoryInput:{
         color:"",
-        text:"",
+        subject:"",
     }
 };
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {FiBook,FiSettings} from 'react-icons/fi';
 import cn from 'classnames';
 import Profile from './Profile';
-import SettingsContainer from '../../containers/main/SettingsContainer';
+import SettingsContainer from '../../containers/main/settings/SettingsContainer';
 import OverviewContainer from '../../containers/main/OverviewContainer';
 
 const MainBlock = styled.div`
@@ -52,10 +52,10 @@ const Text = styled.span`
 `;
 
 const Main = ({user}) => {
-    const [click,setClick] = useState(true);
+    const [view,setView] = useState('overview');
 
-    const onClick = () =>{
-        setClick(!click);
+    const onClick = target =>{
+        setView(target);
     };
 
     return (
@@ -63,11 +63,11 @@ const Main = ({user}) => {
             <Profile user={user}/>
             <ContentBlock>
                 <MainHeader>
-                    <NavItem href="#" className={cn({click})} onClick={onClick}><FiBook/><Text>Overview</Text></NavItem>
-                    <NavItem href="#" className={cn({click:!click})} onClick={onClick}><FiSettings/><Text>Settings</Text></NavItem>
+                    <NavItem href="#" className={cn({click:view==='overview'})} onClick={()=>onClick('overview')}><FiBook/><Text>Overview</Text></NavItem>
+                    <NavItem href="#" className={cn({click:view==='settings'})} onClick={()=>onClick('settings')}><FiSettings/><Text>Settings</Text></NavItem>
                 </MainHeader>
                 {
-                    click?(
+                    view==='overview'?(
                         <OverviewContainer/>
                     ):(
                         <SettingsContainer/>

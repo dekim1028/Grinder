@@ -1,13 +1,13 @@
-import React,{useState, useEffect} from 'react';
-import Settings from '../../components/main/Settings';
+import React,{useState}  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCategoryInput, readSettings, addCategory, deleteCategory, initializeCategoryInput } from '../../modules/settings';
+import { changeCategoryInput, initializeCategoryInput, addCategory, deleteCategory} from '../../../../modules/settings';
+import SubjectCategory from '../../../../components/main/settings/subjectCategory/SubjectCategory';
 
-const SettingsContainer = () => {
+const SubjectCategoryContainer = () => {
+
     const dispatch = useDispatch();
     const [sketchPicker,setSketchPicker] = useState(false);
-    const {user,settings,categoryInput} = useSelector(({user,settings})=>({
-        user:user.user,
+    const {settings,categoryInput} = useSelector(({settings})=>({
         settings:settings.settings,
         categoryInput:settings.categoryInput
     }));
@@ -26,7 +26,7 @@ const SettingsContainer = () => {
     const onChange = e =>{
         const {value} = e.target;
         dispatch(changeCategoryInput({
-            key:"text",
+            key:"subject",
             value
         }));
     };
@@ -36,7 +36,7 @@ const SettingsContainer = () => {
         if(categoryInput.color===""){
             alert("색상을 선택해주세요");
             return;
-        }else if(categoryInput.text===""){
+        }else if(categoryInput.subject===""){
             alert("과목명을 입력해주세요");
             return;
         }
@@ -45,7 +45,7 @@ const SettingsContainer = () => {
             id:settings._id,
             item:{
                 color:categoryInput.color,
-                subject:categoryInput.text,
+                subject:categoryInput.subject,
             }
         }));
 
@@ -53,19 +53,14 @@ const SettingsContainer = () => {
     };
 
     const onDelete = categoryId =>{
-        console.log(typeof categoryId);
         dispatch(deleteCategory({
             id:settings._id,
             categoryId
         }));
     };
 
-    useEffect(()=>{
-        dispatch(readSettings(user.userid));
-    },[dispatch,user.userid]);
-
     return (
-        <Settings
+        <SubjectCategory
             sketchPicker={sketchPicker}
             settings={settings}
             categoryInput={categoryInput}
@@ -78,4 +73,4 @@ const SettingsContainer = () => {
     );
 };
 
-export default SettingsContainer;
+export default SubjectCategoryContainer;
