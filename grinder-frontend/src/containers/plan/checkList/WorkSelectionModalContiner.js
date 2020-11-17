@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WorkSelectionModal from '../../../components/plan/checkList/WorkSelectionModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateChecklist } from '../../../modules/checkList';
+import { deleteChecklistItem } from '../../../modules/checkList';
 
 const WorkSelectionModalContiner = ({visible,onVisible}) => {
     const dispatch = useDispatch();
@@ -13,11 +13,10 @@ const WorkSelectionModalContiner = ({visible,onVisible}) => {
     }));
 
     const onDelete = () =>{
-        const {list} = checklist;
-        const newArr = list.filter(item=>{
-            return item._id!==updateTarget._id;
-        });
-        dispatch(updateChecklist({...checklist,list:newArr}));
+       dispatch(deleteChecklistItem({
+           id:checklist._id,
+           itemId:updateTarget._id
+       }));
     };
 
     const onConfirm = () =>{

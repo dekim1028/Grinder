@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
 import { tempSetUser, check } from './modules/user';
+import { readSettings } from './modules/settings';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -20,6 +21,7 @@ function loadUser(){
     if(user){
       store.dispatch(tempSetUser(user));
       store.dispatch(check());
+      store.dispatch(readSettings(user.userid));
     }
   }catch{
     console.log("localStorage is not working");

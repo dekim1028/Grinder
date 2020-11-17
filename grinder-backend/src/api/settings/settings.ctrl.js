@@ -87,10 +87,8 @@ export const addSettings = async ctx =>{
     DELETE /api/settings/:id
 */
 export const deleteSettings = async ctx =>{
-    
     const {id,categoryId} = ctx.params;
 
-    console.log(id,ctx.request.body);
     try{
         const SubjectCategory = await Settings.findOneAndUpdate(
             { "_id": id},

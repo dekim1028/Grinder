@@ -23,13 +23,13 @@ const SubmitCheckListBtn = styled(Button)`
     margin-top:10px;
 `;
 
-const NewCheckList = ({newCheckList, onAdd, onChange, onDelete, onSubmit}) => {
+const NewCheckList = ({settings,newCheckList, onAdd, onChange, onDelete, onSubmit}) => {
     return (
         <form onSubmit={onSubmit}>
             {
                 newCheckList && 
                 newCheckList.map((item)=>(
-                    <NewCheckListItem key={`newCheckList_${item.id}`} item={item} onDelete={onDelete} onChange={onChange}/>
+                    <NewCheckListItem key={`newCheckList_${item.id}`} subjectCategory={settings.SubjectCategory} item={item} onDelete={onDelete} onChange={onChange}/>
                 ))
             }
             <AddCheckListBtn type="button" onClick={onAdd}>추가</AddCheckListBtn>

@@ -3,6 +3,7 @@ import mongoose, {Schema} from 'mongoose';
 const CheckListSchema = new Schema({
     plannerId:mongoose.Types.ObjectId,
     list:[{
+        color:String,
         subject:String,
         content:String,
         check:{

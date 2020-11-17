@@ -2,7 +2,7 @@ import CheckList from '../../models/checkList';
 
 export const getChecklistById = async (ctx, next) =>{
     const {id} = ctx.params;
-
+    
     try{
         let checklist = await CheckList.findByObjectId(id);
 
@@ -10,7 +10,7 @@ export const getChecklistById = async (ctx, next) =>{
         if(!checklist){
             checklist = new CheckList({
                 plannerId:id,
-                list:null
+                list:[]
             });
         
             try{
@@ -36,31 +36,38 @@ export const read = async ctx => {
  };
 
  /*
-    PATCH /api/checklist/
+    POST /api/checklist/:id
 */
-export const update = async ctx => {
-    const {_id} = ctx.request.body;
+export const addChecklistItem = async ctx =>{
+    const {id} = ctx.params;
+    console.log(id);
     
     try{
-        const checklist = await CheckList.findByIdAndUpdate(_id, ctx.request.body, {
-            new:true, // 이 값을 설정하면 업데이트된 데이터를 반환합니다.
-            //false일떄는 업데이트되기전의 데이터를 반환합니다.
-        }).exec();
+        const SubjectCategory = await CheckList.findOneAndUpdate(
+            { "_id": id},
+            { 
+                "$push": {
+                    "list": ctx.request.body
+                }
+            },
+            {new:true}
+        );
         
-        if(!checklist){
+        if(!SubjectCategory){
             ctx.status = 404;
             return;
         }
-        ctx.body = checklist;
+        ctx.body = SubjectCategory;
     }catch(e){
         ctx.throw(500,e);
     }
-};
+}
+
 
 /*
     PATCH /api/checklist/:id
 */
-export const updateItem = async ctx =>{
+export const updateChecklistItem = async ctx =>{
     const {id} = ctx.params;
     const item = ctx.request.body;
     
@@ -84,6 +91,33 @@ export const updateItem = async ctx =>{
         }
         ctx.body = checklist;
 
+    }catch(e){
+        ctx.throw(500,e);
+    }
+};
+
+/*
+    DELETE /api/checklist/:id
+*/
+export const deleteChecklistItem = async ctx =>{
+    const {id,itemId} = ctx.params;
+
+    try{
+        const checklist = await CheckList.findOneAndUpdate(
+            { "_id": id},
+            { 
+                "$pull": {
+                    "list": {"_id": itemId}
+                }
+            },
+            {new:true}
+        );
+        
+        if(!checklist){
+            ctx.status = 404;
+            return;
+        }
+        ctx.body = checklist;
     }catch(e){
         ctx.throw(500,e);
     }

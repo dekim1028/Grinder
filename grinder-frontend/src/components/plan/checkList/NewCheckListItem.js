@@ -34,16 +34,18 @@ const NewItemBlock = styled.div`
     }
 `;
 
-const NewCheckListItem = ({item, onDelete, onChange}) => {
+const NewCheckListItem = ({subjectCategory, item, onDelete, onChange}) => {
     return (
         <NewItemBlock>
             <MdRemoveCircleOutline onClick={()=>onDelete(item.id)}/>
             <select id={item.id} name="subject" onChange={onChange}>
-                <option value="수학">수학</option>
-                <option value="국어">국어</option>
-                <option value="영어">영어</option>
-                <option value="과학">과학</option>
-                <option value="한국사">한국사</option>
+                <option hidden defaultValue>과목</option>
+                {
+                    subjectCategory&&
+                    subjectCategory.map(category=>(
+                        <option key={category._id} value={category._id} data-color={category.color}>{category.subject}</option>
+                    ))
+                }
             </select>
             <input type="text" id={item.id} name="content" onChange={onChange}/>
         </NewItemBlock>

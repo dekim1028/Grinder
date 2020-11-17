@@ -1,19 +1,21 @@
 import React,{useState,useRef,useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import NewCheckList from '../../../components/plan/checkList/NewCheckList';
-import { updateChecklist } from '../../../modules/checkList';
+import { addChecklistItem } from '../../../modules/checkList';
 
 const NewCheckListContainer = () => {
     const dispatch = useDispatch();
     const [newCheckList,setNewCheckList] = useState([]);
-    const {checklist} = useSelector(({checkList})=>({
-        checklist:checkList.checklist
+    const {checklist,settings} = useSelector(({checkList,settings})=>({
+        checklist:checkList.checklist,
+        settings:settings.settings
     }));
     let startId = useRef(0);
 
     const onAdd = useCallback(() =>{
         const newArr = {
             id:startId.current,
+            color:null,
             subject:null,
             content:null,
             check:false,
@@ -29,12 +31,20 @@ const NewCheckListContainer = () => {
         setNewCheckList(
             newCheckList.map(item=>{
                 if(item.id===parseInt(id)){
-                    item[name]=value;
+                    if(name==="subject"){
+                        const {SubjectCategory} = settings;
+                        const selected = SubjectCategory.filter(item=>item._id===value)[0];
+                        const {color,subject} = selected;
+                        item.color = color;
+                        item.subject = subject;
+                    }else{
+                        item[name]=value;
+                    }
                 }
                 return item;       
             })
         );
-    },[newCheckList]);
+    },[newCheckList,settings]);
 
     const onDelete = useCallback((itemId) =>{
         const newArr = newCheckList.filter(item=>{
@@ -45,17 +55,22 @@ const NewCheckListContainer = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const {list} = checklist;
-        const newArr = list?list.concat(newCheckList.filter(
-            item=>(item.content!==null && item.content!=='')
-        )):newCheckList;
-        dispatch(updateChecklist({...checklist,list:newArr}));
+        
+        const filterList = newCheckList.filter(
+            item=>(item.subject!==null && item.subject!=='' && item.content!==null && item.content!=='')
+        );
+
+        dispatch(addChecklistItem({
+            id:checklist._id,
+            newCheckList:filterList
+        }));
         setNewCheckList([]);
     };
 
     return (
         <NewCheckList
             newCheckList={newCheckList}
+            settings={settings}
             onAdd={onAdd}
             onChange={onChange}
             onDelete={onDelete}
