@@ -19,7 +19,6 @@ const NewCheckListContainer = () => {
             color:"",
             subject:"",
             content:"",
-            check:false,
             startTime:"",
             endTime:"",
         };

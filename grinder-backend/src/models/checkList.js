@@ -7,10 +7,6 @@ const CheckListSchema = new Schema({
         color:String,
         subject:String,
         content:String,
-        check:{
-            type:Boolean,
-            default:false,
-        },
         startTime:String,
         endTime:String,
     }]
