@@ -5,9 +5,8 @@ import moment from "moment";
 import PlannerContent from './PlannerContent';
 import CheckListContainer from '../../containers/plan/checkList/CheckListContainer';
 import Button from '../common/Button';
-import TimeTable from './TimeTable';
-
 import "react-datepicker/dist/react-datepicker.css";
+import TimeTableComponent from '../../containers/plan/timetable/TimeTableComponent';
 
 const PlannerBlock = styled.div`
     padding: 25px 10px;
@@ -62,7 +61,7 @@ const Planner = ({planner,plannerError,loading,plannerDate,onChangeText,onChange
                     <CheckListContainer/>
                 </PlannerContent>
                 <PlannerContent title="오늘의 시간표">
-                    <TimeTable/>
+                    <TimeTableComponent/>
                 </PlannerContent>
             </PlannerPage>
         </PlannerBlock>
