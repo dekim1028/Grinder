@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import timetable from '../../../style/img/timetable.jpg';
 
 const TimeTableBlock = styled.div`
     width: 100%;
@@ -14,6 +15,9 @@ const MinuteBlock = styled.div`
 
 const TimeBlock = styled.div`
     display:flex;
+    background-repeat: repeat-y;
+    background-size: 202px 270px;
+    background-position: 47px 0;
 `;
 
 const HourBlock = styled.div`
@@ -61,7 +65,7 @@ const TimeTable = ({timeTableList}) => {
                 <Minute>50</Minute>
                 <Minute>60</Minute>
             </MinuteBlock>
-            <TimeBlock>
+            <TimeBlock style={{backgroundImage:`url(${timetable})`}}>
                 <HourBlock>
                     <Hour>00</Hour>
                     <Hour>01</Hour>
