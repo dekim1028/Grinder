@@ -53,7 +53,6 @@ const TimeListBlock = styled.div`
 `;
 
 const TimeTable = ({timeTableList}) => {
-    console.log(timeTableList);
     return (
         <TimeTableBlock>
             <MinuteBlock>

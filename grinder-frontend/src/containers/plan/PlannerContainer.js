@@ -4,16 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { readPlanner } from '../../modules/planner';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import {initializeForm, changeField, updatePlanner} from '../../modules/planner';
 import { readChecklist } from '../../modules/checkList';
+import {initializeForm, changeField, updatePlanner} from '../../modules/planner';
 
 const PlannerContainer = ({history,match}) => {
     const dispatch = useDispatch();
     const [plannerDate, setPlannerDate] = useState(new Date());
 
-    const {planner,plannerError,loading} = useSelector(({planner,loading})=>({
+    const {planner,plannerError,checklist,loading} = useSelector(({planner,checkList,loading})=>({
         planner:planner.planner,
         plannerError:planner.plannerError,
+        checklist:checkList.checklist,
         loading:loading['planner/READ_PLANNER'],
     }));
 
@@ -48,6 +49,27 @@ const PlannerContainer = ({history,match}) => {
             dispatch(readChecklist(id));
         }
     },[dispatch,planner]);
+
+    useEffect(()=>{
+        if(planner && checklist){
+            const {list} = checklist;
+            let studyTime = list.filter(item=>
+                item.startTime!==""&&item.endTime!==""
+            ).reduce((ac,cu)=>{
+                const plannerDateText = moment(plannerDate).format("yyyy-MM-DD");
+                const startTime = new Date(plannerDateText+" "+cu.startTime).getTime();
+                const endTime = new Date(plannerDateText+" "+cu.endTime).getTime();
+                return ac + (endTime-startTime);
+            },0);
+
+            let hour = parseInt(studyTime/1000/60/60);
+            hour = hour>0?`${hour}시간 `:'';
+            let minute = studyTime/1000/60%60;
+            minute = minute>0?`${minute}분`:'';
+            
+            planner.studyTime = hour+minute;
+        }
+    },[checklist,plannerDate,planner]);
 
     useEffect(()=>{
         return ()=>{
