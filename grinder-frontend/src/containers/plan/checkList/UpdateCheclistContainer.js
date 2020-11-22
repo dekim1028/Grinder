@@ -1,6 +1,7 @@
 import React from 'react';
-import UpdateChecklist from '../../../components/plan/checkList/UpdateChecklist';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import UpdateChecklist from '../../../components/plan/checkList/UpdateChecklist';
 import { changeUpdateTarget, updateChecklistItem } from '../../../modules/checkList';
 
 const UpdateCheclistContainer = ({onConfirm}) => {
@@ -45,6 +46,23 @@ const UpdateCheclistContainer = ({onConfirm}) => {
     };
 
     const onUpdate = () =>{
+
+        if(updateTarget.startTime==="" && updateTarget.endTime!==""){
+            alert("공부 시작시간을 입력해주세요");
+            return;
+        }
+
+        if(updateTarget.startTime!=="" && updateTarget.endTime!==""){
+            const startDateTime = new Date(moment(new Date()).format("yyyy.MM.DD")+" "+updateTarget.startTime).getTime();
+            const endDateTime = new Date(moment(new Date()).format("yyyy.MM.DD")+" "+updateTarget.endTime).getTime();
+
+            if(endDateTime-startDateTime<0){
+                alert("종료시간이 시작시간보다 빠를 수 없습니다.");
+                dispatch(changeUpdateTarget({key:"endTime",value:""}));
+                return;
+            }
+        }
+        
         dispatch(updateChecklistItem({
             id:checklist._id,
             item:updateTarget
