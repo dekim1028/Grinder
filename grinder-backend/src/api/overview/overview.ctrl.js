@@ -16,10 +16,10 @@ export const readOverview = async ctx =>{
             ctx.state.list = [];
         }else{
             const {list} = await CheckList.findByObjectId(_id);
-            ctx.state.list = list;
+            ctx.state.plan = list;
         }
 
-        ctx.body = ctx.state.list;
+        ctx.body = ctx.state.plan;
 
     }catch(e){
         ctx.throw(500,e);
