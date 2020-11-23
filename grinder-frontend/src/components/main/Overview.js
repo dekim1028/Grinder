@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {BiPin} from 'react-icons/bi';
-import Plan from '../plan/Plan';
-import OverviewChart from '../chart/OverviewChart';
+import OverviewPlanContainer from '../../containers/main/overview/OverviewPlanContainer';
+import OverviewChartContainer from '../../containers/main/overview/OverviewChartContainer';
 
 const OverviewBlock = styled.div`
     width:700px;
@@ -28,11 +28,11 @@ const Overview = () => {
         <OverviewBlock>
             <ContentBlock>
                 <Title><BiPin/><span>Study Time Statistics</span></Title>
-                <OverviewChart/>
+                <OverviewChartContainer/>
             </ContentBlock>
             <ContentBlock>
                 <Title><BiPin/><span>Today's Plans</span></Title>
-                <Plan/>
+                <OverviewPlanContainer/>
             </ContentBlock>
         </OverviewBlock>
     );

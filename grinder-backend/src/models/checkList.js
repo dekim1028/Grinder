@@ -16,5 +16,9 @@ CheckListSchema.statics.findByObjectId = function(id){
     return this.findOne({plannerId:id});
 };
 
+CheckListSchema.statics.findByObjectIdArr = function(arr){
+    return this.find({"plannerId" : { $in : arr}});
+}
+
 const CheckList = mongoose.model('CheckList',CheckListSchema);
 export default CheckList;

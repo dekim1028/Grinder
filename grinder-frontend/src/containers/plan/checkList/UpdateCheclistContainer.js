@@ -7,10 +7,11 @@ import { changeUpdateTarget, updateChecklistItem } from '../../../modules/checkL
 const UpdateCheclistContainer = ({onConfirm}) => {
     const dispatch = useDispatch();
 
-    const {checklist,updateTarget,settings} = useSelector(({checkList,settings})=>({
+    const {checklist,updateTarget,settings,planner} = useSelector(({checkList,settings,planner})=>({
         checklist:checkList.checklist,
         updateTarget:checkList.updateTarget,
-        settings:settings.settings
+        settings:settings.settings,
+        planner:planner.planner,
     }));
 
     const onChange = e =>{
@@ -53,8 +54,8 @@ const UpdateCheclistContainer = ({onConfirm}) => {
         }
 
         if(updateTarget.startTime!=="" && updateTarget.endTime!==""){
-            const startDateTime = new Date(moment(new Date()).format("yyyy.MM.DD")+" "+updateTarget.startTime).getTime();
-            const endDateTime = new Date(moment(new Date()).format("yyyy.MM.DD")+" "+updateTarget.endTime).getTime();
+            const startDateTime = new Date(moment(planner.date).format("yyyy.MM.DD")+" "+updateTarget.startTime).getTime();
+            const endDateTime = new Date(moment(planner.date).format("yyyy.MM.DD")+" "+updateTarget.endTime).getTime();
 
             if(endDateTime-startDateTime<0){
                 alert("종료시간이 시작시간보다 빠를 수 없습니다.");
