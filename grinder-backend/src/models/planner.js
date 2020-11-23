@@ -15,5 +15,9 @@ PlannerSchema.statics.findByDate = function(date){
     return this.findOne({date});
 };
 
+PlannerSchema.statics.findIdByDate = function(date){
+    return this.findOne({date},'_id');
+};
+
 const Planner = mongoose.model('Planner',PlannerSchema);
 export default Planner;

@@ -40,7 +40,6 @@ export const read = async ctx => {
 */
 export const addChecklistItem = async ctx =>{
     const {id} = ctx.params;
-    console.log(id);
     
     try{
         const SubjectCategory = await CheckList.findOneAndUpdate(
