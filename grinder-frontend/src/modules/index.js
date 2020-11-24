@@ -7,6 +7,7 @@ import planner,{ plannerSaga } from "./planner";
 import checkList,{ checkListSaga } from "./checkList";
 import settings, { settingsSaga } from "./settings";
 import overview, { overviewSaga } from "./overview";
+import study from "./study";
 
 const rootReducer = combineReducers({
     loading,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     checkList,
     settings,
     overview,
+    study,
 });
 
 export function* rootSaga(){

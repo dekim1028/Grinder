@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BiDotsVertical} from 'react-icons/bi';
+import cn from 'classnames';
 
 const PlansBlock = styled.div``;
 
@@ -11,6 +11,10 @@ const PlanItem = styled.div`
     border-radius: 15px;
     padding: 15px 25px;
     margin:0 10px 10px 0;
+
+    &:hover, &.target{
+        background-color:#F2F2F2;
+    }
 `;
 
 const PlanHeader = styled.div`
@@ -41,12 +45,11 @@ const Category = styled.div`
 
 `;
 
-const OverviewPlanItem = ({item}) =>{
+const OverviewPlanItem = ({item,onClick,target}) =>{
     return (
-        <PlanItem>
+        <PlanItem onClick={()=>onClick(item)} className={cn({target})}>
             <PlanHeader>
                 <h2 className="content">{item.content}</h2>
-                <BiDotsVertical/>
             </PlanHeader>
             <Category>
                 <div className="categoryColor" style={{backgroundColor:`${item.color}`}}></div>
@@ -56,13 +59,18 @@ const OverviewPlanItem = ({item}) =>{
     );
 }
 
-const OverviewPlan = ({plan}) => {
+const OverviewPlan = ({plan,onClick,studyTarget}) => {
     if(!plan) return null;
     return (
         <PlansBlock>
             {
                 plan.map(item=>(
-                    <OverviewPlanItem key={item._id} item={item}/>
+                    <OverviewPlanItem
+                        key={item._id}
+                        item={item}
+                        onClick={onClick}
+                        target={studyTarget?studyTarget._id===item._id:false}
+                    />
                 ))
             }
         </PlansBlock>

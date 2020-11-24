@@ -1,14 +1,14 @@
 import React from 'react';
 import StartStudy from '../../components/study/StartStudy';
+import { useSelector } from 'react-redux';
 
 const StartStudyContainer = () => {
-
-    const goNextQuestion = () =>{
-
-    };
+    const {studyTarget} = useSelector(({study})=>({
+        studyTarget:study.studyTarget
+    }));
 
     return (
-        <StartStudy goNextQuestion={goNextQuestion}/>
+        <StartStudy studyTarget={studyTarget}/>
     );
 };
 

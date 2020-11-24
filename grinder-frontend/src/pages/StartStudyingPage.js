@@ -1,12 +1,15 @@
 import React from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
+import Responsive from '../components/common/Responsive';
 import StartStudyContainer from '../containers/study/StartStudyContainer';
 
 const StartStudyingPage = () => {
     return (
         <>
             <HeaderContainer/>
-            <StartStudyContainer/>
+            <Responsive>
+                <StartStudyContainer/>
+            </Responsive>
         </>
     );
 };
