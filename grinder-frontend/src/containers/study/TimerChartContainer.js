@@ -2,12 +2,13 @@ import React,{useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import TimerChart from '../../components/study/TimerChart';
-import { setStudyingInfo, initializeForm } from '../../modules/study';
+import { setStudyingInfo, initializeForm, updateStudyTime } from '../../modules/study';
+import { withRouter } from 'react-router-dom';
 
-const TimerChartContainer = () => {
+const TimerChartContainer = ({history}) => {
     const dispatch = useDispatch();
-    const [start,setStart] = useState(false);
-    const [time, setTime] = useState(0);
+    const [start,setStart] = useState(false); //시작여부
+    const [time, setTime] = useState(0); //공부시간
     const [chartData,setChartData] = useState([
         { x: ' ', y: 0 },
         { x: ' ', y: 100 },
@@ -15,11 +16,27 @@ const TimerChartContainer = () => {
 
     const {studyTarget,studyingInfo} = useSelector(({study})=>({
         studyTarget:study.studyTarget,
-        studyingInfo:study.studyingInfo
+        studyingInfo:study.studyingInfo,
     }));
 
-    const onClick=()=>{
+    const onStart=()=>{
         setStart(!start);
+        dispatch(setStudyingInfo({
+            key:"id",
+            value:studyTarget._id
+        }));
+        dispatch(setStudyingInfo({
+            key:"startTime",
+            value:moment(new Date()).format('HH:mm')
+        }));
+    };
+
+    const onFinish=()=>{
+        setStart(!start);
+        dispatch(setStudyingInfo({
+            key:"endTime",
+            value:moment(new Date()).format('HH:mm')
+        }));
     };
 
     useEffect(()=>{
@@ -42,24 +59,12 @@ const TimerChartContainer = () => {
     },[start,time]);
 
     useEffect(()=>{
-        if(start){
-            dispatch(setStudyingInfo({
-                key:"id",
-                value:studyTarget._id
-            }));
-            dispatch(setStudyingInfo({
-                key:"startTime",
-                value:moment(new Date()).format('HH:mm')
-            }));
-        }else{
-            if(studyingInfo.startTime){
-                dispatch(setStudyingInfo({
-                    key:"endTime",
-                    value:moment(new Date()).format('HH:mm')
-                }));
-            }
+        if(studyingInfo.startTime && studyingInfo.endTime){
+            dispatch(updateStudyTime({studyingInfo}));
+            alert("정상적으로 기록되었습니다.");
+            history.push('/planner');
         }
-    },[dispatch,start,studyTarget,studyingInfo]);
+    },[dispatch,history,studyingInfo]);
 
     useEffect(()=>{
         return()=>{
@@ -71,7 +76,8 @@ const TimerChartContainer = () => {
         <TimerChart
             studyTarget={studyTarget}
             studyingInfo={studyingInfo}
-            onClick={onClick}
+            onStart={onStart}
+            onFinish={onFinish}
             chartData={chartData}
             start={start}
             time={time}
@@ -79,4 +85,4 @@ const TimerChartContainer = () => {
     );
 };
 
-export default TimerChartContainer;
+export default withRouter(TimerChartContainer);

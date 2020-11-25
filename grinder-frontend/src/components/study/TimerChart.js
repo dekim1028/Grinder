@@ -7,6 +7,10 @@ const TimeChartBlock = styled.div`
     text-align: center;
 `;
 
+const ChartBlock = styled.div`
+    height:400px;
+`;
+
 const Content = styled.div`
     h1{
         font-size: 20px;
@@ -18,14 +22,18 @@ const StudyButton = styled(Button)`
     margin: 30px auto;
 `;
 
-const TimerChart = ({studyTarget,studyingInfo,onClick,chartData,start,time}) => {
+const TimerChart = ({studyTarget,studyingInfo,onStart,onFinish,chartData,start,time}) => {
     if(!studyTarget || !studyingInfo) return null;
     return (
         <TimeChartBlock>
-            <VictoryPie data={chartData} innerRadius={120} animate={{duration: 1000}} colorScale={[studyTarget.color,'#FAFAFA']}/>
+            <ChartBlock>
+                <VictoryPie data={chartData} innerRadius={120} animate={{duration: 1000}} colorScale={[studyTarget.color,'#FAFAFA']}/>
+            </ChartBlock>
             {
                 !start?(
                     <Content>
+                        <h1>{studyTarget.subject}</h1>
+                        <h1>{studyTarget.content}</h1>
                     </Content>
                 ):(
                     <Content>
@@ -34,7 +42,14 @@ const TimerChart = ({studyTarget,studyingInfo,onClick,chartData,start,time}) => 
                     </Content>
                 )
             }
-            <StudyButton onClick={onClick}>{!start?'Start':'Finish'}</StudyButton>
+            {
+                !start?(
+                    <StudyButton onClick={onStart}>Start</StudyButton>
+                ):(
+                    <StudyButton onClick={onFinish}>Finish</StudyButton>
+                )
+            }
+            
         </TimeChartBlock>
     );
 };

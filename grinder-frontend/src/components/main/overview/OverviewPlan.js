@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
+import Button from '../../common/Button';
 
 const PlansBlock = styled.div``;
 
@@ -42,7 +43,21 @@ const Category = styled.div`
         border-radius:50%;
         margin-right:5px;
     }
+`;
 
+const NoData = styled.div`
+    height:180px;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 60px;
+    color: #2E2E2E;
+`;
+
+const PlannerButton = styled(Button)`
+    width:175px;
+    font-size: 13px;
+    margin: 0 auto;
+    margin-top: 10px;
 `;
 
 const OverviewPlanItem = ({item,onClick,target}) =>{
@@ -64,6 +79,7 @@ const OverviewPlan = ({plan,onClick,studyTarget}) => {
     return (
         <PlansBlock>
             {
+                plan.length>0?
                 plan.map(item=>(
                     <OverviewPlanItem
                         key={item._id}
@@ -71,7 +87,12 @@ const OverviewPlan = ({plan,onClick,studyTarget}) => {
                         onClick={onClick}
                         target={studyTarget?studyTarget._id===item._id:false}
                     />
-                ))
+                )):(
+                    <NoData>
+                        조회할 데이터가 없습니다.
+                        <PlannerButton to="/planner">Create today's Plan</PlannerButton>
+                    </NoData>
+                )
             }
         </PlansBlock>
     );

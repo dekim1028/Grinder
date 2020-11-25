@@ -4,6 +4,7 @@ import palnner from './planner';
 import checklist from './checkList';
 import settings from './settings';
 import overview from './overview';
+import study from './study';
 
 const api = new Router();
 
@@ -12,6 +13,7 @@ api.use('/planner',palnner.routes());
 api.use('/checklist',checklist.routes());
 api.use('/overview',overview.routes());
 api.use('/settings',settings.routes());
+api.use('/study',study.routes());
 
 //라우터를 내보냅니다.
 export default api;

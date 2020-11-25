@@ -33,6 +33,7 @@ const UpdateCheclistContainer = ({onConfirm}) => {
     };
 
     const onChangeStartTime = time =>{
+        time=time?time:"";
         dispatch(changeUpdateTarget({
             key:"startTime",
             value:time
@@ -40,6 +41,7 @@ const UpdateCheclistContainer = ({onConfirm}) => {
     };
 
     const onChangeEndTime = time =>{
+        time=time?time:"";
         dispatch(changeUpdateTarget({
             key:"endTime",
             value:time

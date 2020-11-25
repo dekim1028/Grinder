@@ -13,6 +13,7 @@ const StartStudyBlock = styled.div`
 `;
 
 const QuestionBlock = styled.div`
+    width: 500px;
     padding-top:50px;
     transition:0.7s;
 
@@ -49,7 +50,7 @@ const StartStudy = ({studyTarget}) => {
     const [chartOpcity,setChartOpcity] = useState(true);
     const [chartDisplay,setChartDisplay] = useState(true);
 
-    const onClick = () =>{
+    const onNext = () =>{
         setOpicity(!opacity);
 
         setTimeout(()=>{
@@ -69,7 +70,7 @@ const StartStudy = ({studyTarget}) => {
                 <OverviewPlanContainer/>
                 {
                     studyTarget?(
-                        <NextButton onClick={onClick}>다음</NextButton>
+                        <NextButton onClick={onNext}>다음</NextButton>
                     ):(
                         <NextButton disabled>다음</NextButton>
                     )

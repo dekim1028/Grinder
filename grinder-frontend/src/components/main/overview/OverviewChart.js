@@ -18,6 +18,14 @@ const Chart = styled.div`
     }
 `;
 
+const NoData = styled.div`
+    height:180px;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 75px;
+    color: #2E2E2E;
+`;
+
 const OverviewChart = ({chart}) => {
     const chartStyle ={
         parent:{
@@ -81,15 +89,33 @@ const OverviewChart = ({chart}) => {
     return (
         <ChartBlock>
             <Chart>
-                <VictoryPie style={chartStyle} data={yesterdayChart.data} colorScale={yesterdayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                {
+                    yesterdayChart.data.length>1?(
+                        <VictoryPie style={chartStyle} data={yesterdayChart.data} colorScale={yesterdayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                    ):(
+                        <NoData>데이터 없음</NoData>
+                    )
+                }
                 <h2>Yesterday</h2>
             </Chart>
             <Chart>
-                <VictoryPie style={chartStyle} data={todayChart.data} colorScale={todayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                {
+                    todayChart.data.length>1?(
+                        <VictoryPie style={chartStyle} data={todayChart.data} colorScale={todayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                    ):(
+                        <NoData>데이터 없음</NoData>
+                    )
+                }
                 <h2>Today</h2>
             </Chart>
             <Chart>
-                <VictoryPie style={chartStyle} data={weeklyChart.data} colorScale={weeklyChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                {
+                    weeklyChart.data.length>1?(
+                        <VictoryPie style={chartStyle} data={weeklyChart.data} colorScale={weeklyChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                    ):(
+                        <NoData>데이터 없음</NoData>
+                    )
+                }
                 <h2>Weekly</h2>
             </Chart>
         </ChartBlock>
