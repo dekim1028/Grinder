@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import OverviewPlan from '../../../components/main/overview/OverviewPlan';
 import { useSelector, useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import OverviewPlan from '../../../components/main/overview/OverviewPlan';
 import { readOverviewPlan } from '../../../modules/overview';
 import { setStudyTarget } from '../../../modules/study';
 
-const OverviewPlanContainer = () => {
+const OverviewPlanContainer = ({history}) => {
     const dispatch = useDispatch();
     const {list,studyTarget} = useSelector(({overview,study})=>({
         list : overview.list,
@@ -13,6 +14,7 @@ const OverviewPlanContainer = () => {
 
     const onClick = studyTarget =>{
         dispatch(setStudyTarget(studyTarget));
+        history.push('/study');
     };
 
     useEffect(()=>{
@@ -24,4 +26,4 @@ const OverviewPlanContainer = () => {
     );
 };
 
-export default OverviewPlanContainer;
+export default withRouter(OverviewPlanContainer);
