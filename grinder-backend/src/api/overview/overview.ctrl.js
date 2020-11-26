@@ -2,20 +2,22 @@ import moment from 'moment';
 import CheckList from '../../models/checkList';
 import Planner from '../../models/planner';
 
-
 /*
     GET /api/overview/
 */
 export const readOverviewPlan = async ctx =>{
+    const {userid} = ctx.state.user;
     const date = moment(new Date()).format("YYYY-MM-DD");
 
     try{
-        const {_id} = await Planner.findIdByDate(date);
+        const planner = await Planner.findIdByDate(date,userid);
+        console.log(planner);
 
         //플래너가 존재하지 않을 때
-        if(!_id){
+        if(!planner){
             ctx.state.list = [];
         }else{
+            const {_id} = planner;
             const {list} = await CheckList.findByObjectId(_id);
             ctx.state.list = list;
         }
@@ -72,6 +74,7 @@ function setTotalTime(list,date){
     GET /api/overview/chart
 */
 export const readOverviewChart = async ctx =>{
+    const {userid} = ctx.state.user;
     const date = new Date().getTime();
     const yesterday = moment(date - (1 * 24 * 60 * 60 * 1000)).format("YYYY-MM-DD");
     const today = moment(date).format("YYYY-MM-DD");
@@ -84,7 +87,7 @@ export const readOverviewChart = async ctx =>{
         };
 
         //1. yesterday
-        let planner = await Planner.findIdByDate(yesterday);
+        let planner = await Planner.findIdByDate(yesterday,userid);
 
         //플래너가 존재할때
         if(planner){
@@ -94,10 +97,15 @@ export const readOverviewChart = async ctx =>{
             const yesterdayOverview = setTotalTime(list,yesterday);
 
             chart.yesterday = yesterdayOverview;
+        }else{
+            chart.yesterday = {
+                data:[{ x: ' ', y: 0 }],
+                color:['white'],
+            };
         }
 
         //2. today
-        planner = await Planner.findIdByDate(today);
+        planner = await Planner.findIdByDate(today,userid);
 
         //플래너가 존재할때
         if(planner){
@@ -106,10 +114,15 @@ export const readOverviewChart = async ctx =>{
             const todayOverview = setTotalTime(list,today);
 
             chart.today = todayOverview;
+        }else{
+            chart.today = {
+                data:[{ x: ' ', y: 0 }],
+                color:['white'],
+            };
         }
 
         //3.weekly
-        planner = await Planner.findWeeklyPlanner(today);
+        planner = await Planner.findWeeklyPlanner(today,userid);
         
         if(planner){
             const weeklyIds = [];
@@ -127,6 +140,11 @@ export const readOverviewChart = async ctx =>{
             const weeklyOverview = setTotalTime(list,today);
 
             chart.weekly = weeklyOverview;
+        }else{
+            chart.weekly = {
+                data:[{ x: ' ', y: 0 }],
+                color:['white'],
+            };
         }
 
         ctx.state.chart = chart;

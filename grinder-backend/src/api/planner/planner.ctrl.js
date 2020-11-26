@@ -3,12 +3,14 @@ import Planner from '../../models/planner';
 
 export const getPlannerByDate = async (ctx, next) =>{
     let {date} = ctx.params;
+    const {userid} = ctx.state.user;
+
     try{
         if(!date){
             date = moment(new Date()).format("YYYY-MM-DD");
         }
 
-        let planner = await Planner.findByDate(date);
+        let planner = await Planner.findByDate(date,userid);
 
         //플래너가 존재하지 않을 때
         if(!planner){

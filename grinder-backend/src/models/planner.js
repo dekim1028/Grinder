@@ -12,15 +12,15 @@ const PlannerSchema = new Schema({
     studyTime:String
 });
 
-PlannerSchema.statics.findByDate = function(date){
-    return this.findOne({date});
+PlannerSchema.statics.findByDate = function(date,userid){
+    return this.findOne({'date':date,'user.userid':userid});
 };
 
-PlannerSchema.statics.findIdByDate = function(date){
-    return this.findOne({date},'_id');
+PlannerSchema.statics.findIdByDate = function(date,userid){
+    return this.findOne({'date':date,'user.userid':userid},'_id');
 };
 
-PlannerSchema.statics.findWeeklyPlanner = function(date){
+PlannerSchema.statics.findWeeklyPlanner = function(date,userid){
     const today = new Date(date);
     const day = today.getDay();
 
@@ -31,10 +31,11 @@ PlannerSchema.statics.findWeeklyPlanner = function(date){
     const sunday = new Date(today.setDate(sDiff));
 
     return this.find({
-        date: {
+        'date': {
           $gte: moment(monday).format('yyyy-MM-DD'),
           $lte: moment(sunday).format('yyyy-MM-DD')
-        }
+        },
+        'user.userid':userid
     });
 };
 

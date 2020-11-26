@@ -6,13 +6,14 @@ import moment from 'moment';
     PATCH /api/study/
 */
 export const updateStudyTime = async ctx =>{
+    const {userid} = ctx.state.user;
     const {studyingInfo} = ctx.request.body;
     const {id,startTime,endTime} = studyingInfo;
 
     const date = moment(new Date()).format("YYYY-MM-DD");
 
     try{
-        const {_id} = await Planner.findIdByDate(date);
+        const {_id} = await Planner.findIdByDate(date,userid);
         let list = await CheckList.findByObjectId(_id);
 
         const checklist = await CheckList.findByIdAndUpdate(
