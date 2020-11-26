@@ -12,8 +12,24 @@ const ChartBlock = styled.div`
 `;
 
 const Content = styled.div`
-    h1{
+    .subject{
+        font-size: 17px;
+        color: #585858;
+    }
+
+    .content{
+        width: fit-content;
+        max-width: 100%;
         font-size: 20px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .startTime,.studyTime{
+        font-size: 20px;
+        color: #585858;
     }
 `;
 
@@ -32,13 +48,13 @@ const TimerChart = ({studyTarget,studyingInfo,onStart,onFinish,chartData,start,t
             {
                 !start?(
                     <Content>
-                        <h1>{studyTarget.subject}</h1>
-                        <h1>{studyTarget.content}</h1>
+                        <h1 className="subject">[ {studyTarget.subject} ]</h1>
+                        <h1 className="content" style={{borderBottomColor:studyTarget.color,boxShadow:`inset 0 -10px 0 ${studyTarget.color}`}}>{studyTarget.content}</h1>
                     </Content>
                 ):(
                     <Content>
-                        <h1>시작시간 : {studyingInfo.startTime}</h1>
-                        <h1>공부시간 : {time}분</h1>
+                        <h1 className="startTime">시작시간 : {studyingInfo.startTime}</h1>
+                        <h1 className="studyTime">공부시간 : {time}분</h1>
                     </Content>
                 )
             }
