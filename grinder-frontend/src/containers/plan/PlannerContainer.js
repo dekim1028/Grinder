@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState,useCallback } from 'react';
 import Planner from '../../components/plan/Planner';
 import { useSelector, useDispatch } from 'react-redux';
 import { readPlanner } from '../../modules/planner';
@@ -26,6 +26,15 @@ const PlannerContainer = ({history,match}) => {
         }));
     };
 
+    const onChangeStudyTime = useCallback(value => {
+        if(planner){
+            dispatch(changeField({
+                key:"studyTime",
+                value,
+            }));
+        }
+    },[planner,dispatch]);
+
     const onChangeDate = (date) =>{
         dispatch(readPlanner(date));
     };
@@ -51,7 +60,7 @@ const PlannerContainer = ({history,match}) => {
     },[dispatch,planner]);
 
     useEffect(()=>{
-        if(planner && checklist){
+        if(checklist){
             const {list} = checklist;
             let studyTime = list.filter(item=>
                 item.startTime!==""&&item.endTime!==""
@@ -66,10 +75,9 @@ const PlannerContainer = ({history,match}) => {
             hour = hour>0?`${hour}시간 `:'';
             let minute = studyTime/1000/60%60;
             minute = minute>0?`${minute}분`:'';
-            
-            planner.studyTime = hour+minute;
+            onChangeStudyTime(hour+minute);
         }
-    },[checklist,plannerDate,planner]);
+    },[checklist,plannerDate,onChangeStudyTime]);
 
     useEffect(()=>{
         return ()=>{

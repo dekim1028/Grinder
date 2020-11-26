@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 import cn from 'classnames';
 import Button from '../../common/Button';
 
@@ -10,7 +10,7 @@ const PlanItem = styled.div`
     display:inline-block;
     border: 1px solid #D8D8D8;
     border-radius: 15px;
-    padding: 15px 25px;
+    padding: 15px;
     margin:0 10px 10px 0;
 
     &:hover, &.target{
@@ -18,9 +18,19 @@ const PlanItem = styled.div`
     }
 `;
 
+const itemStatusStyle = css`
+    width: 50px;
+    text-align:center;
+    border-radius: 4px;
+    padding: 3px;
+    margin-right:10px;
+    font-size: 12px;
+    color: white;
+`;
+
 const PlanHeader = styled.div`
     display:flex;
-    justify-content:space-between;
+    justify-content: flex-start;
     align-items:center;
     padding-bottom:20px;
     .content{
@@ -29,6 +39,20 @@ const PlanHeader = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+    .complete{
+        ${itemStatusStyle}
+        background-color: #A4A4A4;
+    }
+
+    .continue{
+        ${itemStatusStyle}
+        background-color: #31B404;
+    }
+
+    .noComplete{
+        ${itemStatusStyle}
+        background-color: #B40404;
     }
 `;
 
@@ -64,6 +88,15 @@ const OverviewPlanItem = ({item,onClick,target}) =>{
     return (
         <PlanItem onClick={()=>onClick(item)} className={cn({target})}>
             <PlanHeader>
+                {
+                    item.startTime!=="" && item.endTime!==""?(
+                        <div className="complete">완료</div>
+                    ):item.startTime!=="" && item.endTime===""?(
+                        <div className="continue">진행중</div>
+                    ):(
+                        <div className="noComplete">미완료</div>
+                    )
+                }
                 <h2 className="content">{item.content}</h2>
             </PlanHeader>
             <Category>

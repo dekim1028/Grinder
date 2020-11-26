@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import TimeTable from '../../../components/plan/timetable/TimeTable';
 import { useSelector } from 'react-redux';
 
@@ -35,10 +35,11 @@ const TimeTableComponent = () => {
 
                 top = 27*top+3;
                 if(i>0){
-                    top = top-20-(20*(i-1))-(19.7*checkMultiLline);
+                    console.log(checkMultiLline);
+                    top = top-(20*(i-1))-(19.7*checkMultiLline);
                 }
                 
-                if(sTime.getHours()===eTime.getHours() || (sTime.getHours()===eTime.getHours()-1 && sTime.getMinutes()===eTime.getMinutes())){
+                if(sTime.getHours()===eTime.getHours() || (sTime.getHours()===eTime.getHours()-1 && sTime.getMinutes()===eTime.getMinutes()===0)){
                     newTimeTableList.push({
                         ...newList[i],
                         top,
@@ -63,7 +64,7 @@ const TimeTableComponent = () => {
                         });
 
                         interval-=width;
-                        top+=8;
+                        top+=7;
                         left=0;
                     }
                 }

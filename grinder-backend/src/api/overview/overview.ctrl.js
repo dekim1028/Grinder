@@ -11,7 +11,6 @@ export const readOverviewPlan = async ctx =>{
 
     try{
         const planner = await Planner.findIdByDate(date,userid);
-        console.log(planner);
 
         //플래너가 존재하지 않을 때
         if(!planner){

@@ -61,8 +61,7 @@ const SignInContainer = ({history}) => {
             }catch(e){
                 console.log("localStorage is not working");
             }
-
-            dispatch(readSettings(user.userid));
+            alert(`${user.username}님 안녕하세요!`);
             history.push("/");
         }
     },[dispatch,user,history])

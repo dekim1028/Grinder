@@ -10,12 +10,11 @@ const SignUpContainer = ({page,history}) => {
     const dispatch = useDispatch();
     const [error,setError] = useState('');
 
-    const {form,auth,authError,user,userError} = useSelector(({auth,user})=>({
+    const {form,auth,authError,user} = useSelector(({auth,user})=>({
         form:auth.signup,
         auth:auth.auth,
         authError:auth.authError,
         user:user.user,
-        userError:user.userError,
     }));
 
     const onChange = e =>{
@@ -72,9 +71,10 @@ const SignUpContainer = ({page,history}) => {
             }catch(e){
                 console.log("localStorage is not working");
             }
+            alert(`${user.username}님 안녕하세요!`);
             history.push("/");
         }
-    },[user,history])
+    },[dispatch,user,history])
 
     if(page==="home"){
         return (

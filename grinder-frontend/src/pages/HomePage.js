@@ -8,7 +8,7 @@ const HomePage = () => {
         user:user.user,
     }));
 
-    if(user){
+    if(user && localStorage.getItem("user")){
         return <MainPage/>;
     }else{
         return <AboutGrinderPage/>;
