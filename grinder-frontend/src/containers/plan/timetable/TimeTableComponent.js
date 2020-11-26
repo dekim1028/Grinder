@@ -12,7 +12,8 @@ const TimeTableComponent = () => {
 
     useEffect(()=>{
         if(checklist){
-            const {list} = checklist;
+            const temp = JSON.parse(JSON.stringify(checklist));
+            const {list} = temp;
             let newList = list.filter(item=>
                 item.startTime!==""&&item.endTime!==""
             ).map(item=>{
@@ -35,11 +36,10 @@ const TimeTableComponent = () => {
 
                 top = 27*top+3;
                 if(i>0){
-                    console.log(checkMultiLline);
-                    top = top-(20*(i-1))-(19.7*checkMultiLline);
+                    top = top-(20*(i-1))-(19.7*(checkMultiLline))-20;
                 }
                 
-                if(sTime.getHours()===eTime.getHours() || (sTime.getHours()===eTime.getHours()-1 && sTime.getMinutes()===eTime.getMinutes()===0)){
+                if(sTime.getHours()===eTime.getHours() || (sTime.getHours()===eTime.getHours()-1 && sTime.getMinutes()===0 && eTime.getMinutes()===0)){
                     newTimeTableList.push({
                         ...newList[i],
                         top,
@@ -47,9 +47,10 @@ const TimeTableComponent = () => {
                         width:interval
                     });
                 }else{
+                    let cnt = 0;
                     while(interval){
                         let width = 0;
-                        if(left===0){
+                        if(cnt>0&&left===0){
                             checkMultiLline++;
                             width = interval>60?60:interval;
                         }else{
@@ -66,6 +67,7 @@ const TimeTableComponent = () => {
                         interval-=width;
                         top+=7;
                         left=0;
+                        cnt++;
                     }
                 }
             }
