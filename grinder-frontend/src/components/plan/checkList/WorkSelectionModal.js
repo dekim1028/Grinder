@@ -13,6 +13,7 @@ const ModalBackBlock = styled.div`
     padding: 15% 0;
     background-color:rgba( 255, 255, 255, 0.5 );;
     z-index:998;
+
 `;
 
 const ModalBlock = styled.div`
@@ -21,6 +22,10 @@ const ModalBlock = styled.div`
     margin: 0 auto;
     padding: 5px 5px 20px;
     background-color:white;
+
+    @media (max-width:768px){
+        margin: 50% auto;
+    }
 `;
 
 const ModalTitle = styled.div`

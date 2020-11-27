@@ -5,6 +5,9 @@ import SubjectCategoryContainer from '../../../containers/main/settings/subjectC
 
 const SettingsBlock = styled.div`
     width:700px;
+    @media (max-width:768px){
+        width: 100%;
+    }
 `;
 
 const ContentBlock = styled.div`

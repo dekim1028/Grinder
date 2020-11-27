@@ -1,5 +1,6 @@
 import React from 'react';
 import styled,{css} from 'styled-components';
+import cn from 'classnames';
 
 const inputStyle = css`
     width:100%;
@@ -35,6 +36,14 @@ const PlannerContentBlock = styled.div`
             caret-color: transparent;
             cursor: pointer;
         }
+    }
+
+    @media (max-width:768px){
+        width:100%;
+        .content_div{
+            padding-right:0;
+        }
+        
     }
 `;
 

@@ -31,6 +31,12 @@ const QuestionBlock = styled.div`
     &.display{
         display:none;
     }
+   
+    @media (max-width:768px){
+        &.chart{
+            padding-top:0;
+        }
+    }
 `;
 
 const NextButton = styled(Button)`
@@ -76,7 +82,7 @@ const StartStudy = ({studyTarget}) => {
                     )
                 }
             </QuestionBlock>
-            <QuestionBlock className={cn({opacity:chartOpcity,display:chartDisplay})}>
+            <QuestionBlock className={cn({opacity:chartOpcity,display:chartDisplay,'chart':true})}>
                 <TimerChartContainer/>
             </QuestionBlock>
         </StartStudyBlock>

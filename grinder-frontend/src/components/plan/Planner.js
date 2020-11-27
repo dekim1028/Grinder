@@ -17,6 +17,10 @@ const PlannerPage = styled.div`
     margin:0 auto;
     padding: 20px;
     box-shadow: 1px 1px 5px grey;
+
+    @media (max-width:768px){
+        width: 100%;
+    }
 `;
 
 const PlannerHeader = styled.div`

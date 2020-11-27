@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {FiBook,FiSettings} from 'react-icons/fi';
 import cn from 'classnames';
-import Profile from './Profile';
 import SettingsContainer from '../../containers/main/settings/SettingsContainer';
-import OverviewContainer from '../../containers/main/OverviewContainer';
+import OverviewContainer from '../../containers/main/overview/OverviewContainer';
 
 const MainBlock = styled.div`
+    width: 800px;
     display:flex;
     justify-content:center;
     padding: 50px 0;
+    margin: 0 auto;
+    
+    @media (max-width:768px){
+        width: 100%;
+        display:block;
+    }
 `;
 
 const ContentBlock =styled.div``;
@@ -23,7 +29,7 @@ const MainHeader = styled.nav`
 `;
 
 const NavItem = styled.a`
-    width:150px;
+    width:50%;
     display: inline-block;
     padding: 10px;
     text-align: center;
@@ -51,7 +57,7 @@ const Text = styled.span`
     vertical-align: bottom;
 `;
 
-const Main = ({user}) => {
+const Main = () => {
     const [view,setView] = useState('overview');
 
     const onClick = target =>{
@@ -60,7 +66,6 @@ const Main = ({user}) => {
 
     return (
         <MainBlock>
-            <Profile user={user}/>
             <ContentBlock>
                 <MainHeader>
                     <NavItem href="#" className={cn({click:view==='overview'})} onClick={()=>onClick('overview')}><FiBook/><Text>Overview</Text></NavItem>

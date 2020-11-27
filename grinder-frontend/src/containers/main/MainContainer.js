@@ -14,7 +14,7 @@ const MainContainer = () => {
     },[dispatch,user]);
 
     return (
-        <Main user={user}/>
+        <Main/>
     );
 };
 

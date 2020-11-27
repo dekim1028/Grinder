@@ -1,5 +1,5 @@
 import React from 'react';
-import Overview from '../../components/main/Overview';
+import Overview from '../../../components/main/overview/Overview';
 
 const OverviewContainer = () => {
     return (

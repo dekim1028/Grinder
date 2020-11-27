@@ -3,8 +3,18 @@ import styled from 'styled-components';
 import {VictoryPie} from 'victory';
 
 const ChartBlock = styled.div`
+    @media (max-width:768px){
+        height: 220px;
+        overflow-x: scroll;
+    }
+`;
+
+const Wrap = styled.div`
     display:flex;
     justify-content: space-around;
+    @media (max-width:768px){
+        width:600px;
+    }
 `;
 
 const Chart = styled.div`
@@ -29,7 +39,9 @@ const NoData = styled.div`
 const OverviewChart = ({chart}) => {
     const chartStyle ={
         parent:{
-            height:"90%"
+            height:"90%",
+            pointerEvent: 'auto',
+            touchAction: 'auto',
         },
         labels:{
             fontSize: 20
@@ -88,36 +100,38 @@ const OverviewChart = ({chart}) => {
 
     return (
         <ChartBlock>
-            <Chart>
-                {
-                    yesterdayChart.data.length>1?(
-                        <VictoryPie style={chartStyle} data={yesterdayChart.data} colorScale={yesterdayChart.color} innerRadius={80} animate={{duration: 2000}}/>
-                    ):(
-                        <NoData>데이터 없음</NoData>
-                    )
-                }
-                <h2>Yesterday</h2>
-            </Chart>
-            <Chart>
-                {
-                    todayChart.data.length>1?(
-                        <VictoryPie style={chartStyle} data={todayChart.data} colorScale={todayChart.color} innerRadius={80} animate={{duration: 2000}}/>
-                    ):(
-                        <NoData>데이터 없음</NoData>
-                    )
-                }
-                <h2>Today</h2>
-            </Chart>
-            <Chart>
-                {
-                    weeklyChart.data.length>1?(
-                        <VictoryPie style={chartStyle} data={weeklyChart.data} colorScale={weeklyChart.color} innerRadius={80} animate={{duration: 2000}}/>
-                    ):(
-                        <NoData>데이터 없음</NoData>
-                    )
-                }
-                <h2>Weekly</h2>
-            </Chart>
+            <Wrap>
+                <Chart>
+                    {
+                        yesterdayChart.data.length>1?(
+                            <VictoryPie style={chartStyle} data={yesterdayChart.data} colorScale={yesterdayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                        ):(
+                            <NoData>데이터 없음</NoData>
+                        )
+                    }
+                    <h2>Yesterday</h2>
+                </Chart>
+                <Chart>
+                    {
+                        todayChart.data.length>1?(
+                            <VictoryPie style={chartStyle} data={todayChart.data} colorScale={todayChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                        ):(
+                            <NoData>데이터 없음</NoData>
+                        )
+                    }
+                    <h2>Today</h2>
+                </Chart>
+                <Chart>
+                    {
+                        weeklyChart.data.length>1?(
+                            <VictoryPie style={chartStyle} data={weeklyChart.data} colorScale={weeklyChart.color} innerRadius={80} animate={{duration: 2000}}/>
+                        ):(
+                            <NoData>데이터 없음</NoData>
+                        )
+                    }
+                    <h2>Weekly</h2>
+                </Chart>
+            </Wrap>
         </ChartBlock>
     );
 };

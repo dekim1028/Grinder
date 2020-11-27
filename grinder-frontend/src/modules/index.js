@@ -28,7 +28,7 @@ export function* rootSaga(){
         checkListSaga(),
         settingsSaga(),
         overviewSaga(),
-        studySaga()
+        studySaga(),
     ]);
 };
 

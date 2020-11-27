@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import {BiPin} from 'react-icons/bi';
-import OverviewPlanContainer from '../../containers/main/overview/OverviewPlanContainer';
-import OverviewChartContainer from '../../containers/main/overview/OverviewChartContainer';
+import OverviewPlanContainer from '../../../containers/main/overview/OverviewPlanContainer';
+import OverviewChartContainer from '../../../containers/main/overview/OverviewChartContainer';
 
 const OverviewBlock = styled.div`
     width:700px;
+    @media (max-width:768px){
+        width: 100%;
+    }
 `;
 
 const Title =styled.h1`
