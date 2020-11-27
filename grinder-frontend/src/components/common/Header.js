@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
+import {GiHamburgerMenu} from 'react-icons/gi';
+import {MdCancel} from 'react-icons/md';
 
 const HeaderBlock = styled.div`
     position:fixed;
@@ -22,44 +25,105 @@ const LogoBlock = styled(Link)`
     font-weight:bold;
 `;
 
-const MenuBlock = styled.div`
-    width:100%;
-    color:white;
+const Logo = styled(Link)`
+    display: block;
+    padding: 5px;
+    font-size:30px;
     font-weight:bold;
-    margin: 0 30px;
-    font-size: 15px;
-    display:flex;
-    align-items:center;
+    color: #135461;
+`;
+
+const MenuBlock = styled.div`
+    width: 100%;
+    height:100%;
+    transition: 1s;
+    position: fixed;
+    display: flex;
+    z-index:999;
+    background:rgba( 255, 255, 255, 0.5 );
+    
+    &.hidden{
+        margin-left: -100%; 
+    }
+`;
+
+const Wrap = styled.div`
+    width: 400px;
+    height:100%;
+    padding:50px 20px;
+    background-color:white;
+    box-shadow: 1px 1px 5px grey;
+
+    @media (max-width:768px){
+        width: 85%;
+    }
+    
 `;
 
 const Menu = styled(Link)`
-    margin: 0 20px;
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #062438;
+    border-bottom: 1px dashed #E6E6E6;
     &:hover{
-        color:#8CE0C6;
+        color:#0D4253;
     }
 `;
 
 const StyledButton = styled(Button)`
-    background:none;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
     border:1px solid white;
     color:white;
+`;
+
+const StyldfCancel = styled(MdCancel)`
+    margin:10px 0 0 5px;
+    font-size: 30px;
+    color: gray;
+    cursor:pointer;
+    &:hover{
+        color:#A4A4A4;
+    }
 `;
 
 const Space = styled.div`
     height:50px;
 `;
 
+const HamburgerMenu = styled(GiHamburgerMenu)`
+    color:white;
+    margin-right:10px;
+    font-size:25px;
+    cursor:pointer;
+`;
+
 const Header = ({onLogout}) => {
+    const [hidden,setHidden] = useState(true);
+
+    const onHidden = () =>{
+        setHidden(!hidden);
+    }
+
     return (
         <>
             <HeaderBlock>
+                <HamburgerMenu onClick={onHidden}/>
                 <LogoBlock to="/">GRINDER</LogoBlock>
-                <MenuBlock>
-                    <Menu to="/study">Start Studying</Menu>
-                    <Menu to="/planner">Planner</Menu>
-                </MenuBlock>
-                <StyledButton onClick={onLogout}>Logout</StyledButton>
             </HeaderBlock>
+            <MenuBlock className={cn({hidden})}>
+                <Wrap>
+                    <Logo to="/">GRINDER</Logo>
+                    <Menu to="/study">Start Study</Menu>
+                    <Menu to="/planner">My Planner</Menu>
+                    <StyledButton onClick={onLogout}>Logout</StyledButton>
+                </Wrap>
+                <StyldfCancel onClick={onHidden}/>
+            </MenuBlock>
             <Space/>
         </>
     );
