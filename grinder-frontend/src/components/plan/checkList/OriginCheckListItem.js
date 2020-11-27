@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 const itemStatusStyle = css`
     width: 67px;
+    height: 20px;
     text-align:center;
     border-radius: 4px;
     padding: 3px;
@@ -12,6 +13,7 @@ const itemStatusStyle = css`
 
 const OriginItemBlock = styled.div`
     display:flex;
+    align-items:center;
     font-family: 'Rix오늘의만화',Comic Sans MS;
     margin-bottom:10px;
 
