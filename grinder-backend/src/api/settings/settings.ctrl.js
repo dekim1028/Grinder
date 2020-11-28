@@ -1,4 +1,4 @@
-import Settings from '../../models/Settings';
+import Settings from '../../models/settings';
 
 export const getSettingsById = async (ctx, next) =>{
     const {id} = ctx.params;
