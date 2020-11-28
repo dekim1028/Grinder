@@ -48,7 +48,7 @@ const MenuBlock = styled.div`
 `;
 
 const Wrap = styled.div`
-    width: 400px;
+    width: 300px;
     height:100%;
     padding:50px 20px;
     background-color:white;
