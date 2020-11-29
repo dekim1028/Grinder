@@ -37,7 +37,7 @@ function setTotalTime(list,date){
             
             if(!total[value.subjectCategoryId]){
                 total[value.subjectCategoryId] = {
-                    studyTime,
+                    studyTime:studyTime===0?1:studyTime,
                     color : value.color,
                     subject : value.subject
                 };
