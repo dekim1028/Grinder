@@ -9,7 +9,9 @@ import PlannerPage from './pages/PlannerPage';
 function App() {
   return (
     <>
-      <Helmet>
+      <Helmet meta={[
+        { property: "og:description", content: "Planner for Grinders" },
+      ]}>
         <title>GRINDER</title>
       </Helmet>
       <Route path="/" component={HomePage} exact/>
