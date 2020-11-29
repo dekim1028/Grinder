@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import {Helmet} from 'react-helmet-async';
+import MetaTags from 'react-meta-tags';
 import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
@@ -9,11 +9,12 @@ import PlannerPage from './pages/PlannerPage';
 function App() {
   return (
     <>
-      <Helmet meta={[
-        { property: "og:description", content: "Planner for Grinders" },
-      ]}>
-        <title>GRINDER</title>
-      </Helmet>
+      <MetaTags>
+          <title>GRINDER</title>
+          <meta name="description" content="Planner for grinders" />
+          <meta property="og:title" content="GRINDER" />
+          <meta property="og:image" content="path/to/image.jpg" />
+        </MetaTags>
       <Route path="/" component={HomePage} exact/>
       <Route path="/signin" component={SignInPage}/>
       <Route path="/signup" component={SignUpPage}/>
