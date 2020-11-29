@@ -13,26 +13,25 @@ const MinuteBlock = styled.div`
     display:flex;
 `;
 
-const TimeBlock = styled.div`
-    display:flex;
-    background-repeat: repeat-y;
-    background-size: 202px 270px;
-    background-position: 47px 0;
-`;
-
-const HourBlock = styled.div`
-    width: 49px;
-`;
-
 const Minute = styled.div`
+    width:13%;
     padding: 5px 8px;
     text-align:center;
     font-weight:500;
     border-bottom:1px solid;
     border-right:1px solid;
     &.text{
+        width: 22%;
         font-weight:bold;
     }
+`;
+
+const TimeBlock = styled.div`
+    display:flex;
+`;
+
+const HourBlock = styled.div`
+    width: 22.2%;
 `;
 
 const Hour = styled.div`
@@ -44,6 +43,9 @@ const Hour = styled.div`
 `;
 
 const TimeListBlock = styled.div`
+    width: 79%;
+    background-repeat: repeat-y;
+    background-size: 100% 40%;
     .item{
         width: 20px;
         height: 20px;
@@ -64,7 +66,7 @@ const TimeTable = ({timeTableList}) => {
                 <Minute>50</Minute>
                 <Minute>60</Minute>
             </MinuteBlock>
-            <TimeBlock style={{backgroundImage:`url(${timetable})`}}>
+            <TimeBlock>
                 <HourBlock>
                     <Hour>00</Hour>
                     <Hour>01</Hour>
@@ -92,7 +94,7 @@ const TimeTable = ({timeTableList}) => {
                     <Hour>23</Hour>
                     <Hour>24</Hour>
                 </HourBlock>
-                <TimeListBlock>
+                <TimeListBlock style={{backgroundImage:`url(${timetable})`}}>
                     {
                         timeTableList.map((item,index)=>(
                             <div
@@ -101,7 +103,7 @@ const TimeTable = ({timeTableList}) => {
                                 style={{
                                     width:`${item.width*3.3}px`,
                                     top:`${item.top}px`,
-                                    left:`${item.left*3.25}px`,
+                                    left:`${item.left*1.67}%`,
                                     backgroundColor:`${item.color}`,
                                 }}
                             />
