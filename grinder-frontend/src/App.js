@@ -13,7 +13,7 @@ function App() {
           <title>GRINDER</title>
           <meta property="og:title" content="GRINDER" />
           <meta property="og:description" content="Planner for grinders"/>
-          <meta property="og:image" content="path/to/image.jpg" />
+          <meta property="og:image" content={`../publish/og_image.png`} />
         </MetaTags>
       <Route path="/" component={HomePage} exact/>
       <Route path="/signin" component={SignInPage}/>
