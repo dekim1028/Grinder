@@ -34,9 +34,9 @@ const TimeTableComponent = () => {
                 let top = sTime.getHours();
                 let left = sTime.getMinutes();
 
-                top = 27*top+3;
+                top = 4*top+0.5;
                 if(i>0){
-                    top = top-(20*(i-1))-(19.7*(checkMultiLline))-20;
+                    top = top-(3*(i-1))-(3*(checkMultiLline))-3;
                 }
                 
                 if(sTime.getHours()===eTime.getHours() || (sTime.getHours()===eTime.getHours()-1 && sTime.getMinutes()===0 && eTime.getMinutes()===0)){
@@ -65,7 +65,7 @@ const TimeTableComponent = () => {
                         });
 
                         interval-=width;
-                        top+=7;
+                        top+=1.13;
                         left=0;
                         cnt++;
                     }

@@ -101,8 +101,8 @@ const TimeTable = ({timeTableList}) => {
                                 key={`${item._id}_${index}`}
                                 className="item"
                                 style={{
-                                    width:`${item.width*3.3}px`,
-                                    top:`${item.top}px`,
+                                    width:`${item.width*1.65}%`,
+                                    top:`${item.top}%`,
                                     left:`${item.left*1.67}%`,
                                     backgroundColor:`${item.color}`,
                                 }}
