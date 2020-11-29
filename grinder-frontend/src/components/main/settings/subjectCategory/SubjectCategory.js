@@ -60,13 +60,14 @@ const InputBlock = styled.form`
 `;
 
 const InputBox = styled.div`
-    width: 100%;
+    width: 400px;
     display: flex;
     align-items: center;
     padding: 5px 10px;
     background-color:#fafbfc;
 
     .subjectInput{
+        width: 170px;
         margin-left:5px;
         border: none;
         outline: none;
