@@ -11,8 +11,8 @@ function App() {
     <>
       <MetaTags>
           <title>GRINDER</title>
-          <meta name="description" content="Planner for grinders" />
           <meta property="og:title" content="GRINDER" />
+          <meta property="og:description" content="Planner for grinders"/>
           <meta property="og:image" content="path/to/image.jpg" />
         </MetaTags>
       <Route path="/" component={HomePage} exact/>
