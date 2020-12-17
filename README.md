@@ -8,7 +8,7 @@ Study planner for grinders
 ---
 + Front-end : react, redux, redux-saga, styled-component
 + Back-end : node.js, mongoDB
-+ Hosting : AWS, Nginx, pm2
++ Hosting : EC2, Route 53, Nginx, pm2
 
 ### **Main Function**
 ---
