@@ -4,14 +4,15 @@ import { useSelector } from 'react-redux';
 import MainPage from './MainPage';
 
 const HomePage = () => {
-    const {user} = useSelector(({user})=>({
+    const {user,userError} = useSelector(({user})=>({
         user:user.user,
+        userError:user.userError,
     }));
 
-    if(user && localStorage.getItem("user")){
-        return <MainPage/>;
-    }else{
+    if(!user || userError){
         return <AboutGrinderPage/>;
+    }else{
+        return <MainPage/>;
     }
 };
 

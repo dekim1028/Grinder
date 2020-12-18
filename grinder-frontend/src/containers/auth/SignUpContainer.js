@@ -50,7 +50,9 @@ const SignUpContainer = ({page,history}) => {
     }
 
     useEffect(()=>{
-        dispatch(initializeForm());
+        return(()=>{
+            dispatch(initializeForm());
+        });
     },[dispatch]);
 
     useEffect(()=>{
@@ -61,7 +63,7 @@ const SignUpContainer = ({page,history}) => {
         if(auth){
             dispatch(check());
         }
-    },[dispatch,auth,authError])
+    },[dispatch,auth,authError]);
 
     useEffect(()=>{
         if(user){
@@ -71,10 +73,9 @@ const SignUpContainer = ({page,history}) => {
             }catch(e){
                 console.log("localStorage is not working");
             }
-            alert(`${user.username}님 안녕하세요!`);
             history.push("/");
         }
-    },[dispatch,user,history])
+    },[dispatch,user,history]);
 
     if(page==="home"){
         return (

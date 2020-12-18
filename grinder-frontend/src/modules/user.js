@@ -18,8 +18,7 @@ function checkFailureSaga(){
     }catch(e){
         console.log(e);
     }
-};
-
+}
 
 function* logoutSaga(){
     try{

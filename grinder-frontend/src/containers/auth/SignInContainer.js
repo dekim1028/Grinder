@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import AuthTemplate from '../../components/auth/AuthTemplate';
 import { changeField, initializeForm, signIn } from '../../modules/auth';
 import { check } from '../../modules/user';
-import { readSettings } from '../../modules/settings';
 
 const SignInContainer = ({history}) => {
     const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const SignInContainer = ({history}) => {
         if(auth){
             dispatch(check());
         }
-    },[dispatch,auth,authError])
+    },[dispatch,auth,authError]);
 
     useEffect(()=>{
         if(user){
@@ -61,10 +60,9 @@ const SignInContainer = ({history}) => {
             }catch(e){
                 console.log("localStorage is not working");
             }
-            alert(`${user.username}님 안녕하세요!`);
             history.push("/");
         }
-    },[dispatch,user,history])
+    },[dispatch,user,history]);
 
     return (
         <AuthTemplate type="SignIn" form={form} onChange={onChange} onSubmit={onSubmit} error={error}/>

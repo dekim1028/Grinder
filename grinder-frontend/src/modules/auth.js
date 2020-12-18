@@ -60,6 +60,7 @@ const auth = handleActions({
     [SIGN_UP_SUCCESS]:(state,{payload:auth})=>({
         ...state,
         auth,
+        authError:null,
     }),
     [SIGN_UP_FAILURE]:(state,{payload:error})=>({
         ...state,
@@ -68,6 +69,7 @@ const auth = handleActions({
     [SIGN_IN_SUCCESS]:(state,{payload:auth})=>({
         ...state,
         auth,
+        authError:null,
     }),
     [SIGN_IN_FAILURE]:(state,{payload:error})=>({
         ...state,
