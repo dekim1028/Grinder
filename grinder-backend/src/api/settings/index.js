@@ -4,7 +4,12 @@ import checkLoggedIn from '../../lib/checkLoggedIn';
 
 const settings = new Router();
 
-settings.get('/:id', checkLoggedIn, settingsCtrl.getSettingsById, settingsCtrl.readSettings);
+settings.get(
+	'/:id',
+	checkLoggedIn,
+	settingsCtrl.getSettingsById,
+	settingsCtrl.readSettings,
+);
 settings.post('/:id', checkLoggedIn, settingsCtrl.addSettings);
 settings.delete('/:id/:categoryId', checkLoggedIn, settingsCtrl.deleteSettings);
 

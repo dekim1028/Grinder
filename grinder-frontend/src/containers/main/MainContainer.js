@@ -4,18 +4,16 @@ import Main from '../../components/main/Main';
 import { readSettings } from '../../modules/settings';
 
 const MainContainer = () => {
-    const dispatch = useDispatch();
-    const {user} = useSelector(({user})=>({
-        user:user.user,
-    }));
+	const dispatch = useDispatch();
+	const { user } = useSelector(({ user }) => ({
+		user: user.user,
+	}));
 
-    useEffect(()=>{
-        dispatch(readSettings(user.userid));
-    },[dispatch,user]);
+	useEffect(() => {
+		dispatch(readSettings(user.userid));
+	}, [dispatch, user]);
 
-    return (
-        <Main/>
-    );
+	return <Main />;
 };
 
 export default MainContainer;

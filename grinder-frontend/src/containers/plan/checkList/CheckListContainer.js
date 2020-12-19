@@ -2,10 +2,7 @@ import React from 'react';
 import CheckList from '../../../components/plan/checkList/CheckList';
 
 const CheckListContainer = () => {
-
-    return (
-        <CheckList/>
-    );
+	return <CheckList />;
 };
 
 export default CheckListContainer;

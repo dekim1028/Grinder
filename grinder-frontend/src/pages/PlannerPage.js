@@ -4,14 +4,14 @@ import Responsive from '../components/common/Responsive';
 import PlannerContainer from '../containers/plan/PlannerContainer';
 
 const PlannerPage = () => {
-    return (
-        <>
-            <HeaderContainer/>
-            <Responsive>
-                <PlannerContainer/>
-            </Responsive>
-        </>
-    );
+	return (
+		<>
+			<HeaderContainer />
+			<Responsive>
+				<PlannerContainer />
+			</Responsive>
+		</>
+	);
 };
 
 export default PlannerPage;

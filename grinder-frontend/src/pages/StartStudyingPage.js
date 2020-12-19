@@ -4,14 +4,14 @@ import Responsive from '../components/common/Responsive';
 import StartStudyContainer from '../containers/study/StartStudyContainer';
 
 const StartStudyingPage = () => {
-    return (
-        <>
-            <HeaderContainer/>
-            <Responsive>
-                <StartStudyContainer/>
-            </Responsive>
-        </>
-    );
+	return (
+		<>
+			<HeaderContainer />
+			<Responsive>
+				<StartStudyContainer />
+			</Responsive>
+		</>
+	);
 };
 
 export default StartStudyingPage;

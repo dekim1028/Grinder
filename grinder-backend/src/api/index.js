@@ -8,12 +8,12 @@ import study from './study';
 
 const api = new Router();
 
-api.use('/auth',auth.routes());
-api.use('/planner',palnner.routes());
-api.use('/checklist',checklist.routes());
-api.use('/overview',overview.routes());
-api.use('/settings',settings.routes());
-api.use('/study',study.routes());
+api.use('/auth', auth.routes());
+api.use('/planner', palnner.routes());
+api.use('/checklist', checklist.routes());
+api.use('/overview', overview.routes());
+api.use('/settings', settings.routes());
+api.use('/study', study.routes());
 
 //라우터를 내보냅니다.
 export default api;

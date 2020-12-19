@@ -1,7 +1,5 @@
 import client from './client';
 
-export const check = () =>
-    client.get("/api/auth/check");
+export const check = () => client.get('/api/auth/check');
 
-export const logout = () =>
-    client.post("/api/auth/logout");
+export const logout = () => client.post('/api/auth/logout');

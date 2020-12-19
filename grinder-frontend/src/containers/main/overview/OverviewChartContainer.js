@@ -4,19 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { readOverviewChart } from '../../../modules/overview';
 
 const OverviewChartContainer = () => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const {chart} = useSelector(({overview})=>({
-        chart:overview.chart,
-    }));
+	const { chart } = useSelector(({ overview }) => ({
+		chart: overview.chart,
+	}));
 
-    useEffect(()=>{
-        dispatch(readOverviewChart());
-    },[dispatch]);
+	useEffect(() => {
+		dispatch(readOverviewChart());
+	}, [dispatch]);
 
-    return (
-        <OverviewChart chart={chart}/>
-    );
+	return <OverviewChart chart={chart} />;
 };
 
 export default OverviewChartContainer;

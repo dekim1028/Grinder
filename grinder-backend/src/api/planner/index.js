@@ -4,7 +4,12 @@ import checkLoggedIn from '../../lib/checkLoggedIn';
 
 const palnner = new Router();
 
-palnner.get('/:date', checkLoggedIn, plannerCtrl.getPlannerByDate, plannerCtrl.read);
+palnner.get(
+	'/:date',
+	checkLoggedIn,
+	plannerCtrl.getPlannerByDate,
+	plannerCtrl.read,
+);
 palnner.patch('/', checkLoggedIn, plannerCtrl.update);
 
 export default palnner;
