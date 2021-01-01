@@ -27,8 +27,13 @@ PlannerSchema.statics.findWeeklyPlanner = function (date, userid) {
 	const mDiff = today.getDate() - day + (day == 0 ? -6 : 1);
 	const sDiff = today.getDate() - day + (day == 0 ? 0 : 7);
 
-	const monday = new Date(today.setDate(mDiff));
-	const sunday = new Date(today.setDate(sDiff));
+	let monday = new Date(today.setDate(mDiff));
+	let sunday = new Date(today.setDate(sDiff));
+
+	// [추가] 년도 바뀔 때 버그 수정
+	if (sunday < monday) {
+		sunday = new Date(monday.getFullYear() + 1, 0, sunday.getDate() + 1);
+	}
 
 	return this.find({
 		date: {
